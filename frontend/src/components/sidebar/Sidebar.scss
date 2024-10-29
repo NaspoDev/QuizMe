@@ -1,4 +1,49 @@
+@use "../../utility_styles/mixins" as *;
+@use "../../utility_styles/variables" as *;
+
 // Sidebar component styles
 
 .Sidebar {
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  height: 100%;
+  background-color: $theme-color-red;
+  color: $text-color-white;
+
+  .heading {
+    @include displayFlex(column);
+    padding-bottom: 40px;
+
+    .title {
+      margin-bottom: 10px;
+    }
+  }
+
+  .buttons {
+    @include displayFlex(column);
+    width: 100%;
+    height: auto;
+    gap: 30px;
+
+    .sidebar-button {
+      width: 80%;
+    }
+
+    .sidebar-button-orange {
+      background-color: $theme-color-orange;
+    }
+
+    .sidebar-button-green {
+      background-color: $success-green;
+    }
+  }
+
+  .developer-credits-container {
+    @include displayFlex(column, flex-end, center);
+    padding-bottom: 20px;
+
+    .naspo-hyperlink {
+      color: $theme-color-orange;
+    }
+  }
 }
