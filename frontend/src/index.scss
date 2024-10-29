@@ -1,24 +1,53 @@
 // Global Styles
 
 // Fonts
-// *If you're using a font-server, replace the following with your implementation of the fonts. (i.e. utility classes or mixins).
+// Imported via Google Fonts CDN
 
-// Bolder font face, mainly used for headings.
-@font-face {
-  font-family: "Font 1 Name";
-  src: url(path/to/font/file);
+// Bold font
+@mixin fontBold {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+// Semibold font
+@mixin fontSemiBold {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 // Regular text font.
-@font-face {
-  font-family: "Font 2 Name";
-  src: url(path/to/font/file);
+@mixin fontRegular {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
-// Lighter font face.
-@font-face {
-  font-family: "Font 3 Name";
-  src: url(path/to/font/file);
+// Light font
+@mixin fontLight {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+// Light-italic font
+@mixin fontBold {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}
+
+// Special handwriting font
+@mixin fontBold {
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 // Variables
