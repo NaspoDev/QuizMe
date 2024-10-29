@@ -1,0 +1,116 @@
+// Global Styles
+
+// Fonts
+// *If you're using a font-server, replace the following with your implementation of the fonts. (i.e. utility classes or mixins).
+
+// Bolder font face, mainly used for headings.
+@font-face {
+  font-family: "Font 1 Name";
+  src: url(path/to/font/file);
+}
+
+// Regular text font.
+@font-face {
+  font-family: "Font 2 Name";
+  src: url(path/to/font/file);
+}
+
+// Lighter font face.
+@font-face {
+  font-family: "Font 3 Name";
+  src: url(path/to/font/file);
+}
+
+// Variables
+// NOTE: It may be better to put this in it's own file. A utility module (_variables.scss).
+// In typography, its better to not use pure white and pure black for text colors.
+$text-color-white: #faf9f6;
+$text-color-black: #212427;
+
+// General
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  // apply the regular font here, so that it's set as the default font.
+  font-size: 18px; // Base font 18px.
+}
+
+body {
+  overflow-x: hidden;
+  // implement text color
+}
+
+// prettier-ignore
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+  }
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+// Utility text classes
+// Used for standardizing text sizes and styles throughout the application.
+// All text has regular font by default (as described in the * tag above).
+
+// *NOTE: If you're using a utility class library like tailwind, just delete these.
+
+// Sizes
+.text-3xl {
+  font-size: 2.5em;
+}
+
+.text-2xl {
+  font-size: 2em;
+}
+
+.text-xl {
+  font-size: 1.5em;
+}
+
+.text-lg {
+  font-size: 1.25em;
+}
+
+.text-reg {
+  font-size: 1em;
+}
+
+.text-sm {
+  font-size: 0.875em;
+}
+
+// Fonts/Styles
+.font-bold {
+  // implement bold font
+}
+
+.font-semibold {
+  // implement semi-bold font
+}
+
+.font-reg {
+  // implement regular font
+}
+
+.font-light {
+  // implement light font
+}
