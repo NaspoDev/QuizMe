@@ -1,2 +1,16 @@
+@use "./utility_styles/mixins" as *;
+
 // Styles for App component.
 // Mainly for layout structure.
+
+.App {
+  @include displayFlex();
+
+  .Sidebar {
+    width: 25%;
+  }
+
+  .main-content {
+    width: 75%;
+  }
+}
