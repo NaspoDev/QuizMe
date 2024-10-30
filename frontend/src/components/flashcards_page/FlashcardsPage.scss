@@ -2,3 +2,8 @@
 @use "../../utility_styles/variables" as *;
 
 // Flashcards Page styling
+
+.FlashcardsPage {
+  @include displayFlex(column, flex-start, center);
+  padding-top: 50px;
+}
