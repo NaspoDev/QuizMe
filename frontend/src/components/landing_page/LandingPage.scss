@@ -1,0 +1,18 @@
+@use "../../utility_styles/mixins" as *;
+@use "../../utility_styles/variables" as *;
+
+// Landing Page styling
+
+.LandingPage {
+  @include displayFlex(column, center, flex-start);
+  width: 100%;
+  height: 100%;
+  padding-left: 150px;
+  gap: 80px;
+
+  .description-list {
+    .description-item {
+      margin-bottom: 20px;
+    }
+  }
+}

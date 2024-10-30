@@ -1,4 +1,5 @@
 @use "./utility_styles/mixins" as *;
+@use "./utility_styles/variables" as *;
 
 // Styles for App component.
 // Mainly for layout structure.
@@ -7,6 +8,7 @@
   width: 100%;
   height: 100vh;
   @include displayFlex();
+  background-color: $background-color-white;
 
   .Sidebar {
     width: 25%;
