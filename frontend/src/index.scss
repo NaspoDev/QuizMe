@@ -83,7 +83,9 @@ img {
   max-width: 100%;
 }
 
-button {
+// Button class, typically applied to button or React-Router Link elements
+// to get styled as a button.
+.button {
   all: unset;
   cursor: pointer;
   @include displayFlex();
