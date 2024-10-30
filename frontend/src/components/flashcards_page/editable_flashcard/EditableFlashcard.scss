@@ -42,6 +42,20 @@
     .back-face {
       @include displayFlex(column, space-between, flex-start);
       padding: 20px;
+
+      .details-and-buttons {
+        width: 100%;
+        @include displayFlex(row, space-between);
+
+        .flashcard-buttons {
+          @include displayFlex();
+          gap: 10px;
+        }
+      }
+    }
+
+    .icon-button {
+      color: $text-color-black;
     }
   }
 }

@@ -6,4 +6,8 @@
 .FlashcardsPage {
   @include displayFlex(column, flex-start, center);
   padding-top: 50px;
+
+  .heading {
+    margin-bottom: 50px;
+  }
 }
