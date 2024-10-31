@@ -15,7 +15,7 @@ function EditableFlashcard({
   topic,
 }: EditableFlashcardProps) {
   return (
-    <div className="EditableFlashcard">
+    <div className="EditableFlashcard text-sm">
       <div className="container">
         <div className="front-face">
           <p className="question">{question}</p>
