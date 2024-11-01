@@ -15,7 +15,9 @@
   .topics-display {
     display: grid;
     grid-template-columns: 300px 300px;
-    gap: 50px;
+    width: 100%;
+    justify-content: space-evenly;
+    row-gap: 50px;
 
     .topic-card {
       @include displayFlex(row, space-between);
@@ -23,7 +25,11 @@
       background-color: $theme-color-orange;
       padding: 25px 18px;
       border-radius: 10px;
-      box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+      .details-container {
+        @include displayFlex(row);
+        gap: 8px;
+      }
     }
   }
 }

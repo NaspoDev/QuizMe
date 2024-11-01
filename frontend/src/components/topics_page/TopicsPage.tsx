@@ -19,11 +19,14 @@ function TopicsPage() {
       <h1 className="topics-heading text-2xl font-bold">Your Topics</h1>
       <div className="topics-display">
         {topics.map((topic) => (
-          <div className="topic-card font-semibold" key={topic.id}>
+          <div className="topic-card font-semibold button" key={topic.id}>
             <p className="topic-name">{topic.name}</p>
-            <p className="topic-number-of-flashcards">
-              {topic.numberOfFlashcards}
-            </p>
+            <div className="details-container">
+              <p className="topic-number-of-flashcards">
+                {topic.numberOfFlashcards}
+              </p>
+              <span className="material-symbols-rounded">quiz</span>
+            </div>
           </div>
         ))}
       </div>

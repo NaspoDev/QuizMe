@@ -88,8 +88,8 @@ button {
   cursor: pointer;
 }
 
-// Button class, typically applied to button or React-Router Link elements
-// to get styled as a button.
+// Button class, applied to elements to make them look and behave
+// like buttons.
 .button {
   cursor: pointer;
   @include displayFlex();
