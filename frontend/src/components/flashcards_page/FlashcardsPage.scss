@@ -5,25 +5,31 @@
 
 .FlashcardsPage {
   @include displayFlex(column, flex-start, center);
-  padding: 50px 50px 0px 50px;
+  padding: 50px 50px 0px 80px;
   height: 100%;
 
   .heading {
     margin-bottom: 50px;
   }
 
-  .flashcards-display {
-    @include displayFlex(row, flex-start);
-    flex-wrap: wrap;
-    gap: 30px;
-    flex-grow: 1;
-    overflow-y: auto;
+  .content-container {
     position: relative;
-  }
+    flex-grow: 1;
+    overflow: hidden;
 
-  .add-task-button {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
+    .flashcards-display {
+      @include displayFlex(row, flex-start);
+      flex-wrap: wrap;
+      height: 100%;
+      overflow-y: auto;
+      gap: 30px;
+      padding-bottom: 70px;
+    }
+
+    .add-task-button {
+      position: absolute;
+      bottom: 40px;
+      right: 70px;
+    }
   }
 }

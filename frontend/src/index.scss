@@ -137,6 +137,27 @@ button {
 
 // Styling properties and effects for orange icon buttons.
 .icon-button-orange {
+  background-color: $theme-color-orange;
+
+  &:hover {
+    background-color: $text-color-white;
+    color: $theme-color-orange;
+  }
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $light-gray;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $dark-gray;
+  border-radius: 10px;
 }
 
 // Utility text classes
