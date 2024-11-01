@@ -76,6 +76,38 @@ function FlashcardsPage() {
           topic="OOP"
           key={10}
         />
+        <EditableFlashcard
+          id="1"
+          answer="This is the answer!"
+          question="This is the question?"
+          topic="OOP"
+          key={11}
+        />
+        <EditableFlashcard
+          id="1"
+          answer="This is the answer!"
+          question="This is the question?"
+          topic="OOP"
+          key={12}
+        />
+        <EditableFlashcard
+          id="1"
+          answer="This is the answer!"
+          question="This is the question?"
+          topic="OOP"
+          key={13}
+        />
+        <EditableFlashcard
+          id="1"
+          answer="This is the answer!"
+          question="This is the question?"
+          topic="OOP"
+          key={14}
+        />
+        {/* add new task button */}
+        <button className="add-task-button icon-button icon-button-green">
+          <span className="material-symbols-rounded text-3xl">add</span>
+        </button>
       </div>
     </div>
   );

@@ -22,8 +22,10 @@ function EditableFlashcard({
           <div className="details-and-buttons">
             <p className="flashcard-topic font-light-italic">{topic}</p>
             <div className="flashcard-buttons">
-              <span className="material-symbols-rounded icon-button">edit</span>
-              <span className="material-symbols-rounded icon-button">
+              <span className="material-symbols-rounded card-option-button">
+                edit
+              </span>
+              <span className="material-symbols-rounded card-option-button">
                 delete
               </span>
             </div>
@@ -35,8 +37,10 @@ function EditableFlashcard({
           <div className="details-and-buttons">
             <p className="flashcard-topic font-light-italic">{topic}</p>
             <div className="flashcard-buttons">
-              <span className="material-symbols-rounded icon-button">edit</span>
-              <span className="material-symbols-rounded icon-button">
+              <span className="material-symbols-rounded card-option-button">
+                edit
+              </span>
+              <span className="material-symbols-rounded card-option-button">
                 delete
               </span>
             </div>

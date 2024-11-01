@@ -83,10 +83,14 @@ img {
   max-width: 100%;
 }
 
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 // Button class, typically applied to button or React-Router Link elements
 // to get styled as a button.
 .button {
-  all: unset;
   cursor: pointer;
   @include displayFlex();
   @include fontSemiBold();
@@ -101,6 +105,38 @@ img {
   &:hover {
     transform: scale(0.99) translateY(2px);
   }
+}
+
+// Applied to button elements or Link elements to style a Google Material
+// Symbol as an icon button.
+.icon-button {
+  cursor: pointer;
+  @include displayFlex();
+
+  color: $text-color-white;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(0.99) translateY(2px);
+  }
+}
+
+// Styling properties and effects for green icon buttons.
+.icon-button-green {
+  background-color: $success-green;
+
+  &:hover {
+    background-color: $text-color-white;
+    color: $success-green;
+  }
+}
+
+// Styling properties and effects for orange icon buttons.
+.icon-button-orange {
 }
 
 // Utility text classes
