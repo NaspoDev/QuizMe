@@ -5,21 +5,21 @@
 
 .FlashcardsPage {
   @include displayFlex(column, flex-start, center);
-  padding: 50px 50px 0px 80px;
+  padding: 50px 50px 0px 50px;
   height: 100%;
 
   .flashcards-page-heading {
     margin-bottom: 50px;
   }
-
   .content-container {
     position: relative;
+    width: 100%;
     flex-grow: 1;
     overflow: hidden;
 
     .flashcards-display {
-      @include displayFlex(row, flex-start);
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       height: 100%;
       overflow-y: auto;
       gap: 30px;
