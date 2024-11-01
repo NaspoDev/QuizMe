@@ -1,7 +1,7 @@
 import "./EditableFlashcard.scss";
 
 interface EditableFlashcardProps {
-  id: string;
+  id: number;
   question: string;
   answer: string;
   topic: string | null;

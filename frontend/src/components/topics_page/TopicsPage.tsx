@@ -8,6 +8,7 @@ interface Topic {
 
 // The Topics page. Displays all the users topics.
 function TopicsPage() {
+  // temp filler data
   const topics: Topic[] = [
     { id: 1, name: "OOP", numberOfFlashcards: 10 },
     { id: 2, name: "Design Patterns", numberOfFlashcards: 8 },
