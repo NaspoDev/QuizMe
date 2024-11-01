@@ -23,20 +23,29 @@ function Sidebar() {
         )}
 
         {/* Flashcards or Topics page */}
-        {location.pathname == "/flashcards" ||
-          (location.pathname == "/topics" && (
-            <>
-              <button className="sidebar-button sidebar-button-orange">
-                All Flashcards
-              </button>
-              <button className="sidebar-button sidebar-button-orange">
-                My Topics
-              </button>
-              <button className="sidebar-button sidebar-button-green">
-                Start a Quiz
-              </button>
-            </>
-          ))}
+        {(location.pathname == "/flashcards" ||
+          location.pathname == "/topics") && (
+          <>
+            <Link
+              to="/flashcards"
+              className="button sidebar-button sidebar-button-orange"
+            >
+              All Flashcards
+            </Link>
+            <Link
+              to="/flashcards"
+              className="button sidebar-button sidebar-button-orange"
+            >
+              My Topics
+            </Link>
+            <Link
+              to="/flashcards"
+              className="button sidebar-button sidebar-button-green"
+            >
+              Start a Quiz
+            </Link>
+          </>
+        )}
       </div>
 
       {/* Crediting myself */}
