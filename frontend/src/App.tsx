@@ -1,14 +1,16 @@
 import "./App.scss";
 import Sidebar from "./components/sidebar/Sidebar";
 import LandingPage from "./components/landing_page/LandingPage";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import FlashcardsPage from "./components/flashcards_page/FlashcardsPage";
 import TopicsPage from "./components/topics_page/TopicsPage";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      <Sidebar />
+      <Sidebar pathname={location.pathname} />
       <div className="main-content">
         <Routes>
           <Route path="/" element={<LandingPage />} />

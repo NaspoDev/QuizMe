@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 
+// Sidebar props.
+// This component should be re-rendered whenever the location changes.
+interface SidebarProps {
+  pathname: string;
+}
+
 // Sidebar component. Always persistent, used to navigate and control the app.
-function Sidebar() {
+function Sidebar({ pathname }: SidebarProps) {
   return (
     <div className="Sidebar">
       <div className="heading">
@@ -13,7 +19,7 @@ function Sidebar() {
       {/* Buttons container. Buttons change based on current page. */}
       <div className="buttons">
         {/* Landing page */}
-        {location.pathname == "/" && (
+        {pathname == "/" && (
           <Link
             to="/flashcards"
             className="button sidebar-button sidebar-button-green"
@@ -23,8 +29,7 @@ function Sidebar() {
         )}
 
         {/* Flashcards or Topics page */}
-        {(location.pathname == "/flashcards" ||
-          location.pathname == "/topics") && (
+        {(pathname == "/flashcards" || pathname == "/topics") && (
           <>
             <Link
               to="/flashcards"
