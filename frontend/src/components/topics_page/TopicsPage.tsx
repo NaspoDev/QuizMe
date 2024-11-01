@@ -31,6 +31,10 @@ function TopicsPage() {
           </div>
         ))}
       </div>
+      {/* add new topic button */}
+      <button className="add-topic-button icon-button icon-button-green">
+        <span className="material-symbols-rounded text-3xl">add</span>
+      </button>
     </div>
   );
 }

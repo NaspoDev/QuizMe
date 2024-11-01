@@ -16,8 +16,12 @@
     display: grid;
     grid-template-columns: 300px 300px;
     width: 100%;
+
     justify-content: space-evenly;
     row-gap: 50px;
+
+    overflow-y: auto;
+    padding-bottom: 70px;
 
     .topic-card {
       @include displayFlex(row, space-between);
@@ -31,5 +35,11 @@
         gap: 8px;
       }
     }
+  }
+
+  .add-topic-button {
+    position: fixed;
+    bottom: 40px;
+    right: 100px;
   }
 }
