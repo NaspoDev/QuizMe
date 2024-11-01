@@ -4,7 +4,9 @@ import "./FlashcardsPage.scss";
 function FlashcardsPage() {
   return (
     <div className="FlashcardsPage">
-      <h1 className="heading font-bold text-2xl">Your Flashcards</h1>
+      <h1 className="flashcards-page-heading font-bold text-2xl">
+        Your Flashcards
+      </h1>
       <div className="content-container">
         <div className="flashcards-display">
           <EditableFlashcard
@@ -76,34 +78,6 @@ function FlashcardsPage() {
             question="This is the question?"
             topic="OOP"
             key={10}
-          />
-          <EditableFlashcard
-            id="1"
-            answer="This is the answer!"
-            question="This is the question?"
-            topic="OOP"
-            key={11}
-          />
-          <EditableFlashcard
-            id="1"
-            answer="This is the answer!"
-            question="This is the question?"
-            topic="OOP"
-            key={12}
-          />
-          <EditableFlashcard
-            id="1"
-            answer="This is the answer!"
-            question="This is the question?"
-            topic="OOP"
-            key={13}
-          />
-          <EditableFlashcard
-            id="1"
-            answer="This is the answer!"
-            question="This is the question?"
-            topic="OOP"
-            key={14}
           />
         </div>
         {/* add new task button */}

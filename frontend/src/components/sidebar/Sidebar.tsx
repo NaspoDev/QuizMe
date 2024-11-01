@@ -33,13 +33,13 @@ function Sidebar() {
               All Flashcards
             </Link>
             <Link
-              to="/flashcards"
+              to="/topics"
               className="button sidebar-button sidebar-button-orange"
             >
               My Topics
             </Link>
             <Link
-              to="/flashcards"
+              to="/start-quiz"
               className="button sidebar-button sidebar-button-green"
             >
               Start a Quiz

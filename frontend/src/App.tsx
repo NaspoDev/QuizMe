@@ -3,6 +3,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import LandingPage from "./components/landing_page/LandingPage";
 import { Route, Routes } from "react-router-dom";
 import FlashcardsPage from "./components/flashcards_page/FlashcardsPage";
+import TopicsPage from "./components/topics_page/TopicsPage";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/flashcards" element={<FlashcardsPage />} />
-          <Route path="/topics" element={<LandingPage />} />
+          <Route path="/topics" element={<TopicsPage />} />
           <Route path="/active-quiz" element={<LandingPage />} />
         </Routes>
       </div>
