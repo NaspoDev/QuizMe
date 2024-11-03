@@ -1,77 +1,40 @@
+import { useEffect, useState } from "react";
 import EditableFlashcard from "./editable_flashcard/EditableFlashcard";
 import "./FlashcardsPage.scss";
-
-interface Flashcard {
-  id: number;
-  question: string;
-  answer: string;
-  topic: string | null;
-}
+import flashcardService, { Flashcard } from "../../services/FlashcardService";
+import topicService, { Topic } from "../../services/TopicService";
 
 function FlashcardsPage() {
-  // temp filler data
-  const flashcards: Flashcard[] = [
-    {
-      id: 1,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 2,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 3,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 4,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 5,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 6,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 7,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 8,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 9,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-    {
-      id: 10,
-      question: "This is the question?",
-      answer: "This is the answer.",
-      topic: "OOP",
-    },
-  ];
+  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+  // A hashmap cache of flashcard topic id : topic name.
+  const topicNamesCache: Map<string, string> = new Map();
+
+  useEffect(() => {
+    flashcardService.getUserFlashcards("123").then(setFlashcards);
+    cacheTopicNames();
+  }, []);
+
+  // Instead of making a network request for every card to get their topic's
+  // name, we'll cache one's we've already gotten here to prevent redundant
+  // network requests.
+  async function cacheTopicNames(): Promise<void> {
+    for (const flashcard of flashcards) {
+      if (
+        // if the flashcard has a topic and it's topic is not cached
+        flashcard.topicId != null &&
+        !topicNamesCache.has(flashcard.topicId)
+      ) {
+        // Make the request for the topic.
+        const topic: Topic | null = await topicService.getTopic(
+          flashcard.topicId
+        );
+        // If the topic is not null, cache it's name.
+        if (topic != null) {
+          topicNamesCache.set(flashcard.topicId, topic.name);
+        }
+      }
+    }
+  }
 
   return (
     <div className="FlashcardsPage">
@@ -85,7 +48,8 @@ function FlashcardsPage() {
               id={flashcard.id}
               answer={flashcard.answer}
               question={flashcard.question}
-              topic={flashcard.topic}
+              topicId={flashcard.topicId}
+              topicName={topicNamesCache.get(flashcard.topicId)}
               key={flashcard.id}
             />
           ))}
