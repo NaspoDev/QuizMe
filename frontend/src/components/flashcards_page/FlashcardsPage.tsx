@@ -10,8 +10,13 @@ function FlashcardsPage() {
   const topicNamesCache: Map<string, string> = new Map();
 
   useEffect(() => {
-    flashcardService.getUserFlashcards("123").then(setFlashcards);
-    cacheTopicNames();
+    // Call backend api to get the user's flashcards.
+    flashcardService.getUserFlashcards("123").then((data) => {
+      setFlashcards(data);
+      cacheTopicNames();
+      // TODO: make the comopnent renreder when setting topic names.
+      // Thats why topics are displaying
+    });
   }, []);
 
   // Instead of making a network request for every card to get their topic's
@@ -49,7 +54,8 @@ function FlashcardsPage() {
               answer={flashcard.answer}
               question={flashcard.question}
               topicId={flashcard.topicId}
-              topicName={topicNamesCache.get(flashcard.topicId)}
+              // prettier-ignore
+              topicName={flashcard.topicId ? topicNamesCache.get(flashcard.topicId) : null}
               key={flashcard.id}
             />
           ))}

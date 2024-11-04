@@ -2,7 +2,7 @@ import { Flashcard } from "../../../services/FlashcardService";
 import "./EditableFlashcard.scss";
 
 interface EditableFlashcardProps extends Flashcard {
-  topicName: string | null;
+  topicName: string | null | undefined;
 }
 
 // A flashcard element that can be used to edit said flashcard.
@@ -18,7 +18,9 @@ function EditableFlashcard({
         <div className="front-face">
           <p className="question">{question}</p>
           <div className="details-and-buttons">
-            <p className="flashcard-topic font-light-italic">{topicName}</p>
+            <p className="flashcard-topic font-light-italic">
+              {topicName ? topicName : "No Topic"}
+            </p>
             <div className="flashcard-buttons">
               <span className="material-symbols-rounded card-option-button">
                 edit
@@ -33,7 +35,9 @@ function EditableFlashcard({
         <div className="back-face">
           <p className="answer">{answer}</p>
           <div className="details-and-buttons">
-            <p className="flashcard-topic font-light-italic">{topicName}</p>
+            <p className="flashcard-topic font-light-italic">
+              {topicName ? topicName : "No Topic"}
+            </p>
             <div className="flashcard-buttons">
               <span className="material-symbols-rounded card-option-button">
                 edit

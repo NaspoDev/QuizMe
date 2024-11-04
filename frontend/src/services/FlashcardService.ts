@@ -16,8 +16,8 @@ class FlashcardService {
     return [
       {
         id: "1",
-        question: "This is the question?",
-        answer: "This is the answer.",
+        question: "This is the first question?",
+        answer: "This is the first answer.",
         topicId: "1",
       },
       {
