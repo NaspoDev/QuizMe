@@ -10,7 +10,7 @@ function EditableFlashcard({ question, answer, topicInfo }: Flashcard) {
         <div className="front-face">
           <p className="question">{question}</p>
           <div className="details-and-buttons">
-            <p className="flashcard-topic font-light-italic">
+            <p className="flashcard-topic font-light-italic text-sm">
               {topicInfo ? topicInfo.topicName : "No Topic"}
             </p>
 
@@ -28,7 +28,7 @@ function EditableFlashcard({ question, answer, topicInfo }: Flashcard) {
         <div className="back-face">
           <p className="answer">{answer}</p>
           <div className="details-and-buttons">
-            <p className="flashcard-topic font-light-italic">
+            <p className="flashcard-topic font-light-italic text-sm">
               {topicInfo ? topicInfo.topicName : "No Topic"}
             </p>
             <div className="flashcard-buttons">

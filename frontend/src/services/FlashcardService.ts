@@ -16,7 +16,8 @@ class FlashcardService {
     return [
       {
         id: "1",
-        question: "This is the first question?",
+        question:
+          "This is the first question? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a ",
         answer: "This is the first answer.",
         topicInfo: {
           topicId: "1",
@@ -83,7 +84,7 @@ class FlashcardService {
         answer: "This is the answer.",
         topicInfo: {
           topicId: "2",
-          topicName: "Design Patterns123456789",
+          topicName: "Design Patterns",
         },
       },
       {
