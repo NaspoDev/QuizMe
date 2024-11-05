@@ -5,7 +5,7 @@ export interface Flashcard {
   id: string;
   question: string;
   answer: string;
-  topicId: string | null;
+  topicInfo: null | { topicId: string; topicName: string };
 }
 
 class FlashcardService {
@@ -18,61 +18,85 @@ class FlashcardService {
         id: "1",
         question: "This is the first question?",
         answer: "This is the first answer.",
-        topicId: "1",
+        topicInfo: {
+          topicId: "1",
+          topicName: "OOP",
+        },
       },
       {
         id: "2",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "2",
+        topicInfo: {
+          topicId: "2",
+          topicName: "Design Patterns",
+        },
       },
       {
         id: "3",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "3",
+        topicInfo: {
+          topicId: "2",
+          topicName: "Design Patterns",
+        },
       },
       {
         id: "4",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "1",
+        topicInfo: {
+          topicId: "1",
+          topicName: "OOP",
+        },
       },
       {
         id: "5",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "3",
+        topicInfo: {
+          topicId: "3",
+          topicName: "System Design",
+        },
       },
       {
         id: "6",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "3",
+        topicInfo: {
+          topicId: "3",
+          topicName: "System Design",
+        },
       },
       {
         id: "7",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "1",
+        topicInfo: {
+          topicId: "1",
+          topicName: "OOP",
+        },
       },
       {
         id: "8",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: "2",
+        topicInfo: {
+          topicId: "2",
+          topicName: "Design Patternssssssssssss",
+        },
       },
       {
         id: "9",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: null,
+        topicInfo: null,
       },
       {
         id: "10",
         question: "This is the question?",
         answer: "This is the answer.",
-        topicId: null,
+        topicInfo: null,
       },
     ];
   }

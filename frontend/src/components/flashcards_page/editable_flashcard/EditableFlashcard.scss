@@ -47,6 +47,11 @@
         width: 100%;
         @include displayFlex(row, space-between);
 
+        .flashcard-topic {
+          border: 1px solid red;
+          padding-right: 10px;
+        }
+
         .flashcard-buttons {
           @include displayFlex();
           gap: 15px;
