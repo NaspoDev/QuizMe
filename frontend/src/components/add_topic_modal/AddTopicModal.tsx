@@ -18,7 +18,7 @@ function AddTopicModal({ isOpen }: { isOpen: boolean }) {
         </form>
         <div className="buttons-container">
           <button className="button">Cancel</button>
-          <button className="button">Create</button>
+          <button className="button button-success">Create</button>
         </div>
       </div>
       {/* Used to apply a dark overlay behind the modal. */}
