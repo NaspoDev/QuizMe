@@ -8,9 +8,7 @@ function FlashcardsPage() {
 
   useEffect(() => {
     // Call backend api to get the user's flashcards.
-    flashcardService.getUserFlashcards("123").then((data) => {
-      setFlashcards(data);
-    });
+    flashcardService.getUserFlashcards("123").then(setFlashcards);
   }, []);
 
   return (

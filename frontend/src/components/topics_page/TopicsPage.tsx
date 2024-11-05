@@ -1,13 +1,16 @@
+import { useEffect, useState } from "react";
 import "./TopicsPage.scss";
-
-interface Topic {
-  id: number;
-  name: string;
-  numberOfFlashcards: number;
-}
+import topicService, { Topic } from "../../services/TopicService";
 
 // The Topics page. Displays all the users topics.
 function TopicsPage() {
+  const [topics, setTopics] = useState<Topic[]>([]);
+
+  useEffect(() => {
+    // Call backend api to get the user's topics.
+    topicService.getUserTopics("123").then(setTopics);
+  });
+
   return (
     <div className="TopicsPage">
       <h1 className="topics-heading text-2xl font-bold">Your Topics</h1>
