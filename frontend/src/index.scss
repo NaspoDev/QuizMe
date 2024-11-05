@@ -88,6 +88,31 @@ button {
   cursor: pointer;
 }
 
+input {
+  outline: none;
+  border: none;
+  padding: 8px 10px;
+  line-height: 25px;
+  background-color: $background-color-white;
+  @include fontRegular();
+  color: $text-color-black;
+
+  border: 1px solid $light-gray;
+  border-radius: 5px;
+  font-size: 16px;
+
+  transition: all 0.3s;
+
+  &::placeholder {
+    color: $dark-gray;
+    @include fontRegular();
+  }
+
+  &:focus {
+    border-color: $success-green;
+  }
+}
+
 // Button class, applied to elements to make them look and behave
 // like buttons.
 .button {

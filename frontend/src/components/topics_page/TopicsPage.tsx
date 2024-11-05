@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import "./TopicsPage.scss";
 import topicService, { Topic } from "../../services/TopicService";
+import AddTopicModal from "../add_topic_modal/AddTopicModal";
 
 // The Topics page. Displays all the users topics.
 function TopicsPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
+  const [isAddTopicModelOpen, setIsAddTopicModelOpen] = useState<boolean>(true);
 
   useEffect(() => {
     // Call backend api to get the user's topics.
@@ -31,6 +33,7 @@ function TopicsPage() {
       <button className="add-topic-button icon-button icon-button-green">
         <span className="material-symbols-rounded text-3xl">add</span>
       </button>
+      <AddTopicModal isOpen={isAddTopicModelOpen} />
     </div>
   );
 }

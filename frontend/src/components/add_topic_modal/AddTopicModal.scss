@@ -1,0 +1,44 @@
+@use "../../utility_styles/mixins" as *;
+@use "../../utility_styles/variables" as *;
+
+// Add Topic Modal styling
+
+// Used to apply a dark overlay behind the modal.
+.add-topic-modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+// Actual modal element styling.
+.AddTopicModal {
+  @include displayFlex(column, flex-start, flex-start);
+  position: absolute;
+  z-index: 101;
+  width: 400px;
+  height: 250px;
+
+  // Centering
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  //   background-color: $background-color-white;
+  background-color: $background-color-white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 1px 4px 10px 5px rgba(0, 0, 0, 0.25);
+
+  .add-topic-heading {
+    margin-bottom: 20px;
+  }
+
+  .buttons-container {
+    width: 100%;
+    @include displayFlex(row, flex-end);
+  }
+}
