@@ -10,9 +10,12 @@ function EditableFlashcard({ question, answer, topicInfo }: Flashcard) {
         <div className="front-face">
           <p className="question">{question}</p>
           <div className="details-and-buttons">
-            <p className="flashcard-topic font-light-italic">
-              {topicInfo ? topicInfo.topicName : "No Topic"}
-            </p>
+            <div className="flashcard-topic-container">
+              <p className="flashcard-topic font-light-italic">
+                {topicInfo ? topicInfo.topicName : "No Topic"}
+              </p>
+            </div>
+
             <div className="flashcard-buttons">
               <span className="material-symbols-rounded card-option-button">
                 edit
@@ -27,9 +30,11 @@ function EditableFlashcard({ question, answer, topicInfo }: Flashcard) {
         <div className="back-face">
           <p className="answer">{answer}</p>
           <div className="details-and-buttons">
-            <p className="flashcard-topic font-light-italic">
-              {topicInfo ? topicInfo.topicName : "No Topic"}
-            </p>
+            <div className="flashcard-topic-container">
+              <p className="flashcard-topic font-light-italic">
+                {topicInfo ? topicInfo.topicName : "No Topic"}
+              </p>
+            </div>
             <div className="flashcard-buttons">
               <span className="material-symbols-rounded card-option-button">
                 edit
