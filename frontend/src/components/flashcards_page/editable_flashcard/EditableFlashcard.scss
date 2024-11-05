@@ -45,15 +45,7 @@
 
       .details-and-buttons {
         width: 100%;
-        // @include displayFlex(row, space-between);
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-
-        .flashcard-topic-container {
-          border: 1px solid red;
-          // padding-right: 10px;
-          text-overflow: ellipsis;
-        }
+        @include displayFlex(row, space-between);
 
         .flashcard-buttons {
           @include displayFlex();
