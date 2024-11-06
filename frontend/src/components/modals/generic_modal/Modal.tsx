@@ -1,15 +1,18 @@
 import { ReactNode, useEffect } from "react";
 import "./Modal.scss";
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
   additionalClasses?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 // Generic Modal Component. Used by more specific types of modals.
 // It has generic shared behaviour like open and close behaviours, and styling.
+
+// Usage: Create and use a specific modal component which returns this Modal
+// component. You can then add children to it to build your modal.
 function Modal({
   isOpen,
   closeModal,
@@ -66,7 +69,7 @@ function Modal({
   return (
     <>
       <div className={`Modal ${additionalClasses}`}>{children}</div>
-      <div className="modal-overlay"></div>
+      <div className="modal-overlay" id="modal-overlay"></div>
     </>
   );
 }

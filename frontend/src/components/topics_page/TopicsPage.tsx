@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./TopicsPage.scss";
 import topicService, { Topic } from "../../services/TopicService";
-import AddTopicModal from "../add_topic_modal/AddTopicModal";
+import AddTopicModal from "../modals/specific_modals/add_topic_modal/AddTopicModal";
 
 // The Topics page. Displays all the users topics.
 function TopicsPage() {
