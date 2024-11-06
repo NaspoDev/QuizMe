@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import EditableFlashcard from "./editable_flashcard/EditableFlashcard";
 import "./FlashcardsPage.scss";
 import flashcardService, { Flashcard } from "../../services/FlashcardService";
+import AddFlashcardModal from "../modals/specific_modals/add_flashcard_modal/AddFlashcardModal";
 
 function FlashcardsPage() {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+  const [isAddFlashcardModalOpen, setIsAddFlashcardModalOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     // Call backend api to get the user's flashcards.
@@ -29,12 +32,30 @@ function FlashcardsPage() {
           ))}
         </div>
         {/* add new task button */}
-        <button className="add-task-button icon-button icon-button-green">
+        <button
+          className="add-task-button icon-button icon-button-green"
+          onClick={openAddFlashcardModal}
+        >
           <span className="material-symbols-rounded text-3xl">add</span>
         </button>
       </div>
+      <AddFlashcardModal
+        isOpen={isAddFlashcardModalOpen}
+        closeModal={closeAddFlashcardModal}
+        flashcards={flashcards}
+        setFlashcards={setFlashcards}
+      />
     </div>
   );
+
+  // Opens the add topic modal.
+  function openAddFlashcardModal(): void {
+    setIsAddFlashcardModalOpen(true);
+  }
+
+  function closeAddFlashcardModal(): void {
+    setIsAddFlashcardModalOpen(false);
+  }
 }
 
 export default FlashcardsPage;

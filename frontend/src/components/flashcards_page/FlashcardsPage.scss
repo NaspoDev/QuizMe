@@ -7,6 +7,7 @@
   @include displayFlex(column, flex-start, center);
   padding: 50px 50px 0px 50px;
   height: 100%;
+  position: relative;
 
   .flashcards-page-heading {
     margin-bottom: 50px;
