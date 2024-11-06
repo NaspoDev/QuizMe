@@ -6,7 +6,8 @@ import AddTopicModal from "../add_topic_modal/AddTopicModal";
 // The Topics page. Displays all the users topics.
 function TopicsPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
-  const [isAddTopicModelOpen, setIsAddTopicModelOpen] = useState<boolean>(true);
+  const [isAddTopicModalOpen, setIsAddTopicModalOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     // Call backend api to get the user's topics.
@@ -30,12 +31,27 @@ function TopicsPage() {
         ))}
       </div>
       {/* add new topic button */}
-      <button className="add-topic-button icon-button icon-button-green">
+      <button
+        className="add-topic-button icon-button icon-button-green"
+        onClick={openAddTopicModal}
+      >
         <span className="material-symbols-rounded text-3xl">add</span>
       </button>
-      <AddTopicModal isOpen={isAddTopicModelOpen} />
+      <AddTopicModal
+        isOpen={isAddTopicModalOpen}
+        closeModal={closeAddTopicModal}
+      />
     </div>
   );
+
+  // Opens the add topic modal.
+  function openAddTopicModal(): void {
+    setIsAddTopicModalOpen(true);
+  }
+
+  function closeAddTopicModal(): void {
+    setIsAddTopicModalOpen(false);
+  }
 }
 
 export default TopicsPage;
