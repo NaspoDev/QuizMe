@@ -16,8 +16,8 @@ function AddTopicModal({ isOpen }: { isOpen: boolean }) {
             placeholder="Topic Name"
           />
         </form>
-        <div className="buttons-container">
-          <button className="button">Cancel</button>
+        <div className="buttons-container text-sm">
+          <button className="button button-dark">Cancel</button>
           <button className="button button-success">Create</button>
         </div>
       </div>

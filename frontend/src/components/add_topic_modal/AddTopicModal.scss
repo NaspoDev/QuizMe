@@ -27,7 +27,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  //   background-color: $background-color-white;
   background-color: $background-color-white;
   border-radius: 10px;
   padding: 20px;
@@ -37,8 +36,18 @@
     margin-bottom: 20px;
   }
 
+  .add-topic-form {
+    width: 100%;
+
+    .topic-name-input {
+      width: 100%;
+    }
+  }
+
   .buttons-container {
     width: 100%;
-    @include displayFlex(row, flex-end);
+    flex: 1;
+    @include displayFlex(row, flex-end, flex-end);
+    gap: 15px;
   }
 }

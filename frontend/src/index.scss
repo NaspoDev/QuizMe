@@ -97,7 +97,7 @@ input {
   @include fontRegular();
   color: $text-color-black;
 
-  border: 1px solid $light-gray;
+  border: 1px solid $dark-gray;
   border-radius: 5px;
   font-size: 16px;
 
@@ -109,7 +109,7 @@ input {
   }
 
   &:focus {
-    border-color: $success-green;
+    border-color: $theme-color-orange;
   }
 }
 
@@ -131,6 +131,14 @@ input {
   &:hover {
     transform: scale(0.99) translateY(2px);
   }
+}
+
+.button-success {
+  background-color: $success-green;
+}
+
+.button-dark {
+  background-color: $dark-gray;
 }
 
 // Applied to button elements or Link elements to style a Google Material
