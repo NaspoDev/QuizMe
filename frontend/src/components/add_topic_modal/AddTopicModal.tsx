@@ -50,7 +50,7 @@ function AddTopicModal({
 
   return (
     <>
-      <div className="AddTopicModal" id="AddTopicModal">
+      <div className="AddTopicModal">
         <h3 className="add-topic-heading text-lg">Create New Topic</h3>
         <form className="add-topic-form">
           <input
