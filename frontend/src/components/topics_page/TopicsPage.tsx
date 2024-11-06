@@ -11,8 +11,9 @@ function TopicsPage() {
 
   useEffect(() => {
     // Call backend api to get the user's topics.
+    // TODO: pass in proper ID
     topicService.getUserTopics("123").then(setTopics);
-  });
+  }, []);
 
   return (
     <div className="TopicsPage">
@@ -40,6 +41,8 @@ function TopicsPage() {
       <AddTopicModal
         isOpen={isAddTopicModalOpen}
         closeModal={closeAddTopicModal}
+        topics={topics}
+        setTopics={setTopics}
       />
     </div>
   );

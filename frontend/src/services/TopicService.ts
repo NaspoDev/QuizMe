@@ -36,6 +36,12 @@ class TopicService {
 
     return null;
   }
+
+  async createTopic(topic: Topic): Promise<void> {
+    // TODO: implementation
+    console.log("New topic created on the server!");
+    console.log(topic);
+  }
 }
 
 const topicService: TopicService = new TopicService();

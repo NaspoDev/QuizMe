@@ -1,12 +1,20 @@
 import { useEffect } from "react";
 import "./AddTopicModal.scss";
+import topicService, { Topic } from "../../services/TopicService";
 
 interface AddTopicModalProps {
   isOpen: boolean;
   closeModal: () => void;
+  topics: Topic[];
+  setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
 }
 
-function AddTopicModal({ isOpen, closeModal }: AddTopicModalProps) {
+function AddTopicModal({
+  isOpen,
+  closeModal,
+  topics,
+  setTopics,
+}: AddTopicModalProps) {
   // Set event listeners on mount to listen for `esc` key click or
   // clicking outside of modal to close it.
   useEffect(() => {
@@ -47,8 +55,9 @@ function AddTopicModal({ isOpen, closeModal }: AddTopicModalProps) {
         <form className="add-topic-form">
           <input
             type="text"
-            className="topic-name-input"
             placeholder="Topic Name"
+            className="topic-name-input"
+            id="topic-name-input"
           />
         </form>
         <div className="buttons-container text-sm">
@@ -69,7 +78,26 @@ function AddTopicModal({ isOpen, closeModal }: AddTopicModalProps) {
   );
 
   function handleCreateTopic(): void {
-    // TODO: implement logic
+    const topicNameInput: HTMLInputElement = document.getElementById(
+      "topic-name-input"
+    ) as HTMLInputElement;
+    const inputValue: string = topicNameInput.value.trim();
+
+    if (inputValue.length > 0) {
+      // Define the new topic object.
+      const newTopic: Topic = {
+        id: "123", // TODO: Pass in proper ID
+        name: inputValue,
+        numberOfFlashcards: 0,
+      };
+
+      // Create new topic locally
+      setTopics([...topics, newTopic]);
+
+      // Create new topic on the server.
+      topicService.createTopic(newTopic);
+    }
+
     closeModal();
   }
 
