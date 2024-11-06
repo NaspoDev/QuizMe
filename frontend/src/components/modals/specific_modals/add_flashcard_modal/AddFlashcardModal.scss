@@ -10,9 +10,22 @@
 
   .add-flashcard-form {
     width: 100%;
+    @include displayFlex(column);
+    gap: 20px;
 
-    .flashcard-text-input {
+    .form-item {
       width: 100%;
+    }
+
+    .flashcard-question-input,
+    .flashcard-answer-input {
+      height: 100px;
+    }
+
+    .flashcard-topic-select-container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
     }
   }
 

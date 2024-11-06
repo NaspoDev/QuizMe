@@ -88,7 +88,8 @@ button {
   cursor: pointer;
 }
 
-input {
+input,
+textarea {
   outline: none;
   border: none;
   padding: 8px 10px;
@@ -111,6 +112,14 @@ input {
   &:focus {
     border-color: $theme-color-orange;
   }
+}
+
+textarea {
+  resize: none;
+}
+
+select {
+  border: 1px solid $dark-gray;
 }
 
 // Button class, applied to elements to make them look and behave

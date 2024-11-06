@@ -32,24 +32,29 @@ function AddFlashcardModal({
     >
       <h3 className="add-flashcard-heading text-lg">Create New Flashcard</h3>
       <form className="add-flashcard-form">
-        <input
-          type="text"
-          placeholder="Enter the question"
-          className="flashcard-question-input form-item"
-          id="flashcard-question-input"
-        />
-        <input
-          type="text"
-          placeholder="Enter the answer"
-          className="flashcard-answer-input form-item"
-          id="flashcard-answer-input"
-        />
-        <div className="topic-select form-item">
+        <div className="flashcard-answer-input-container form-item">
+          <label htmlFor="flashcard-question-input">Question:</label>
+          <textarea
+            placeholder="Enter the question"
+            className="flashcard-question-input form-item"
+            id="flashcard-question-input"
+          />
+        </div>
+
+        <div className="flashcard-answer-input-container form-item">
+          <label htmlFor="flashcard-answer-input">Answer:</label>
+          <textarea
+            placeholder="Enter the answer"
+            className="flashcard-answer-input form-item"
+            id="flashcard-answer-input"
+          />
+        </div>
+        <div className="flashcard-topic-select-container form-item">
           <label htmlFor="flashcard-topic-select">Topic:</label>
           <select
             name="topic"
             id="flashcard-topic-select"
-            className="topic-select"
+            className="flashcard-topic-select"
           >
             {topics.map((topic) => (
               <option
@@ -60,7 +65,13 @@ function AddFlashcardModal({
                 {topic.name}
               </option>
             ))}
-            <option value="null" key={0} className="topic-select-option">
+            {/* No topic is the default selection */}
+            <option
+              value="null"
+              key={0}
+              className="topic-select-option"
+              selected
+            >
               No Topic
             </option>
           </select>
