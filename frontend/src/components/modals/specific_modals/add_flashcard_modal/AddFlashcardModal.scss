@@ -23,11 +23,13 @@
       height: 100px;
     }
 
-    .flashcard-topic-select-container {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 10px;
-      align-items: center;
+    .flashcard-topic-display {
+      @include displayFlex(row, flex-start);
+
+      .topic-display-heading {
+        color: $dark-gray;
+        margin-right: 6px;
+      }
     }
   }
 

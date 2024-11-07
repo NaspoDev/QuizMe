@@ -53,6 +53,8 @@ function FlashcardsPage() {
         closeModal={closeAddFlashcardModal}
         flashcards={flashcards}
         setFlashcards={setFlashcards}
+        topicId={topicId}
+        topicName={topicName}
       />
     </div>
   );
