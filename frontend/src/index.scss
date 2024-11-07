@@ -100,7 +100,7 @@ textarea {
 
   border: 1px solid $dark-gray;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 0.875em;
 
   transition: all 0.3s;
 
@@ -120,6 +120,16 @@ textarea {
 
 select {
   border: 1px solid $dark-gray;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.875em;
+  @include fontRegular();
+  transition: all 0.2s;
+
+  &:focus {
+    border-color: $theme-color-orange;
+    outline: none;
+  }
 }
 
 // Button class, applied to elements to make them look and behave
