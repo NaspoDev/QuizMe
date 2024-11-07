@@ -32,23 +32,16 @@ function AddFlashcardModal({
     >
       <h3 className="add-flashcard-heading text-lg">Create New Flashcard</h3>
       <form className="add-flashcard-form">
-        <div className="flashcard-answer-input-container form-item">
-          <label htmlFor="flashcard-question-input">Question:</label>
-          <textarea
-            placeholder="Enter the question"
-            className="flashcard-question-input form-item"
-            id="flashcard-question-input"
-          />
-        </div>
-
-        <div className="flashcard-answer-input-container form-item">
-          <label htmlFor="flashcard-answer-input">Answer:</label>
-          <textarea
-            placeholder="Enter the answer"
-            className="flashcard-answer-input form-item"
-            id="flashcard-answer-input"
-          />
-        </div>
+        <textarea
+          placeholder="Question"
+          className="flashcard-question-input form-item"
+          id="flashcard-question-input"
+        />
+        <textarea
+          placeholder="Answer"
+          className="flashcard-answer-input form-item"
+          id="flashcard-answer-input"
+        />
         <div className="flashcard-topic-select-container form-item">
           <label htmlFor="flashcard-topic-select">Topic:</label>
           <select
