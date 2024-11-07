@@ -5,15 +5,28 @@ export interface Flashcard {
   id: string;
   question: string;
   answer: string;
-  topicInfo: null | { topicId: string; topicName: string };
+  topicId: string;
 }
 
 class FlashcardService {
-  async getUserFlashcards(userId: string): Promise<Flashcard[]> {
+  async getUserFlashcardsByTopic(
+    userId: string,
+    topicId: string
+  ): Promise<Flashcard[]> {
     // TODO: implementation
+
+    // filler implementation
     console.log(userId);
-    // filler data
-    return flashcards;
+
+    const result: Flashcard[] = [];
+
+    for (const card of flashcards) {
+      if (card.topicId == topicId) {
+        result.push(card);
+      }
+    }
+
+    return result;
   }
 
   async createFlashcard(flashcard: Flashcard): Promise<void> {
@@ -31,84 +44,60 @@ const flashcards: Flashcard[] = [
     id: "1",
     question: "This is the first question?",
     answer: "This is the first answer.",
-    topicInfo: {
-      topicId: "1",
-      topicName: "OOP",
-    },
+    topicId: "1",
   },
   {
     id: "2",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "2",
-      topicName: "Design Patterns",
-    },
+    topicId: "2",
   },
   {
     id: "3",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "2",
-      topicName: "Design Patterns",
-    },
+    topicId: "2",
   },
   {
     id: "4",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "1",
-      topicName: "OOP",
-    },
+    topicId: "1",
   },
   {
     id: "5",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "3",
-      topicName: "System Design",
-    },
+    topicId: "3",
   },
   {
     id: "6",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "3",
-      topicName: "System Design",
-    },
+    topicId: "3",
   },
   {
     id: "7",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "1",
-      topicName: "OOP",
-    },
+    topicId: "1",
   },
   {
     id: "8",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: {
-      topicId: "2",
-      topicName: "Design Patterns",
-    },
+    topicId: "2",
   },
   {
     id: "9",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: null,
+    topicId: "1",
   },
   {
     id: "10",
     question: "This is the question?",
     answer: "This is the answer.",
-    topicInfo: null,
+    topicId: "3",
   },
 ];

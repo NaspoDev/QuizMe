@@ -21,7 +21,7 @@ function Sidebar({ pathname }: SidebarProps) {
         {/* Landing page */}
         {pathname == "/" && (
           <Link
-            to="/flashcards"
+            to="/topics"
             className="button sidebar-button sidebar-button-green"
           >
             Get Started!
@@ -29,14 +29,8 @@ function Sidebar({ pathname }: SidebarProps) {
         )}
 
         {/* Flashcards or Topics page */}
-        {(pathname == "/flashcards" || pathname == "/topics") && (
+        {pathname == "/topics" && (
           <>
-            <Link
-              to="/flashcards"
-              className="button sidebar-button sidebar-button-orange"
-            >
-              All Flashcards
-            </Link>
             <Link
               to="/topics"
               className="button sidebar-button sidebar-button-orange"

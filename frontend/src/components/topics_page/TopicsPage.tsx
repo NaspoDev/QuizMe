@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./TopicsPage.scss";
 import topicService, { Topic } from "../../services/TopicService";
 import AddTopicModal from "../modals/specific_modals/add_topic_modal/AddTopicModal";
+import { Link } from "react-router-dom";
 
 // The Topics page. Displays all the users topics.
 function TopicsPage() {
@@ -20,7 +21,11 @@ function TopicsPage() {
       <h1 className="topics-heading text-2xl font-bold">Your Topics</h1>
       <div className="topics-display">
         {topics.map((topic) => (
-          <div className="topic-card font-semibold button" key={topic.id}>
+          <Link
+            to={`/topics/${topic.id}/${topic.name}`}
+            className="topic-card font-semibold button"
+            key={topic.id}
+          >
             <p className="topic-name">{topic.name}</p>
             <div className="details-container">
               <p className="topic-number-of-flashcards">
@@ -28,7 +33,7 @@ function TopicsPage() {
               </p>
               <span className="material-symbols-rounded">quiz</span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       {/* add new topic button */}

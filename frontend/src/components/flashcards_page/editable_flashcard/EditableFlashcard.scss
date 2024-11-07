@@ -34,10 +34,6 @@
       transform: rotateY(180deg);
     }
 
-    &:hover {
-      transform: rotateY(180deg);
-    }
-
     .front-face,
     .back-face {
       @include displayFlex(column, space-between, flex-start);
@@ -51,27 +47,29 @@
         mask-image: linear-gradient(180deg, black 60%, transparent);
       }
 
-      .details-and-buttons {
-        width: 100%;
-        @include displayFlex(row, space-between);
-
-        .flashcard-topic {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          text-wrap: nowrap;
-          padding-right: 10px;
-        }
-
-        .flashcard-buttons {
-          @include displayFlex();
-          gap: 15px;
+      .answer-container {
+        .answer-heading {
+          color: $dark-gray;
+          margin-bottom: 8px;
         }
       }
-    }
 
-    .card-option-button {
-      color: $text-color-black;
-      font-size: 22px;
+      .buttons {
+        width: 100%;
+        @include displayFlex(row, space-between);
+        padding: 0px 5px;
+
+        .card-option-button {
+          color: $text-color-black;
+          font-size: 24px;
+          transition: all 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            color: $theme-color-red;
+          }
+        }
+      }
     }
   }
 }
