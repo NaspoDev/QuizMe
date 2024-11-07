@@ -125,6 +125,7 @@ select {
   font-size: 0.875em;
   @include fontRegular();
   transition: all 0.2s;
+  background-color: $background-color-white;
 
   &:focus {
     border-color: $theme-color-orange;
