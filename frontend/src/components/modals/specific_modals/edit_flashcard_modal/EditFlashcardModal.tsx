@@ -7,7 +7,7 @@ import flashcardService, {
 interface EditFlashcardModalProps extends ModalProps {
   flashcards: Flashcard[];
   setFlashcards: React.Dispatch<React.SetStateAction<Flashcard[]>>;
-  flashcardToEdit: Flashcard;
+  flashcardToEdit: Flashcard | null;
   topicName: string;
 }
 
@@ -20,6 +20,10 @@ function EditFlashcardModal({
   flashcardToEdit,
   topicName,
 }: EditFlashcardModalProps) {
+  if (flashcardToEdit == null) {
+    return;
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -69,6 +73,10 @@ function EditFlashcardModal({
 
     const questionInputValue: string = flashcardQuestionInput.value.trim();
     const answerInputValue: string = flashcardAnswerInput.value.trim();
+
+    if (flashcardToEdit == null) {
+      return;
+    }
 
     if (questionInputValue.length > 0 && answerInputValue.length > 0) {
       // Update flashcard object.

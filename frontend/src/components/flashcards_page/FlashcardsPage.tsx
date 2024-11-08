@@ -18,18 +18,11 @@ function FlashcardsPage() {
   const [isAddFlashcardModalOpen, setIsAddFlashcardModalOpen] =
     useState<boolean>(false);
 
-  // Dummy flashcard object used to initialize 'flashcardToEdit' state variable.
-  const dummyFlashcard: Flashcard = {
-    id: "123",
-    question: "Dummy question",
-    answer: "Dummy answer",
-    topicId: "123",
-  };
   // This will be set with whatever flashcard needs to be edited.
   // 'setFlashcardToEdit' is called when the user presses the edit button on a
   // EditableFlashcard.
-  const [flashcardToEdit, setFlashcardToEdit] =
-    useState<Flashcard>(dummyFlashcard);
+  // prettier-ignore
+  const [flashcardToEdit, setFlashcardToEdit] = useState<Flashcard | null>(null);
   // Boolean state to determine if the Edit Flashcard Modal should be open.
   const [isEditFlashcardModalOpen, setIsEditFlashcardModalOpen] =
     useState<boolean>(false);
@@ -43,10 +36,7 @@ function FlashcardsPage() {
 
   // Opens the Edit Flashcard Modal whenever the 'flashcardToEdit' changes.
   useEffect(() => {
-    // If 'flashcardToEdit' is still set to the dummy flashcard, don't open.
-    // (This is here to prevent the modal from opening when this component first mounts,
-    // as useEffect is always called on first mount no matter what).
-    if (flashcardToEdit == dummyFlashcard) {
+    if (flashcardToEdit == null) {
       return;
     }
 
@@ -112,6 +102,7 @@ function FlashcardsPage() {
 
   function closeEditFlashcardModal(): void {
     setIsEditFlashcardModalOpen(false);
+    setFlashcardToEdit(null);
   }
 }
 
