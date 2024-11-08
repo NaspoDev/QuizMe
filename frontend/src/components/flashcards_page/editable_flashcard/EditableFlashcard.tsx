@@ -1,10 +1,14 @@
-import { Flashcard } from "../../../services/FlashcardService";
+import flashcardService, {
+  Flashcard,
+} from "../../../services/FlashcardService";
 import "./EditableFlashcard.scss";
 
 interface EditableFlashcardProps {
   flashcard: Flashcard;
   // Used when the edit button is pressed.
   setFlashcardToEdit: React.Dispatch<React.SetStateAction<Flashcard | null>>;
+  flashcards: Flashcard[];
+  setFlashcards: React.Dispatch<React.SetStateAction<Flashcard[]>>;
 }
 
 // A flashcard element that can be used to edit said flashcard.
@@ -12,6 +16,8 @@ interface EditableFlashcardProps {
 function EditableFlashcard({
   flashcard,
   setFlashcardToEdit,
+  flashcards,
+  setFlashcards,
 }: EditableFlashcardProps) {
   // The html id to apply to this EditableFlashcard flashcard container div.
   const flashcardContainerId: string = `flashcard-container-${flashcard.id}`;
@@ -34,7 +40,10 @@ function EditableFlashcard({
             >
               edit
             </span>
-            <span className="material-symbols-rounded card-option-button">
+            <span
+              className="material-symbols-rounded card-option-button"
+              onClick={deleteFlashcard}
+            >
               delete
             </span>
           </div>
@@ -59,7 +68,10 @@ function EditableFlashcard({
             >
               edit
             </span>
-            <span className="material-symbols-rounded card-option-button">
+            <span
+              className="material-symbols-rounded card-option-button"
+              onClick={deleteFlashcard}
+            >
               delete
             </span>
           </div>
@@ -79,6 +91,18 @@ function EditableFlashcard({
     } else {
       containerElement.style.transform = "rotateY(180deg)";
     }
+  }
+
+  // Deletes this flashcard.
+  function deleteFlashcard(): void {
+    // Delete flashcard locally by updating flashcards state array.
+    const updatedFlashcards: Flashcard[] = flashcards.filter(
+      (card) => card.id != flashcard.id
+    );
+    setFlashcards(updatedFlashcards);
+
+    // Delete flashcard on the server.
+    flashcardService.deleteFlashcard(flashcard);
   }
 }
 

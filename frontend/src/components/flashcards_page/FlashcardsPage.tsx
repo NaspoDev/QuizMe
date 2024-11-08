@@ -55,6 +55,8 @@ function FlashcardsPage() {
             <EditableFlashcard
               flashcard={flashcard}
               setFlashcardToEdit={setFlashcardToEdit}
+              flashcards={flashcards}
+              setFlashcards={setFlashcards}
               key={flashcard.id}
             />
           ))}

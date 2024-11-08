@@ -40,6 +40,12 @@ class FlashcardService {
     console.log("Updated flashcard on the server!");
     console.log(flashcard);
   }
+
+  async deleteFlashcard(flashcard: Flashcard): Promise<void> {
+    // TODO: Implementation
+    console.log("Deleted flashcard off the server!");
+    console.log(flashcard);
+  }
 }
 
 const flashcardService: FlashcardService = new FlashcardService();
