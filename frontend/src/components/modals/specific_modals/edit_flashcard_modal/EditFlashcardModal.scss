@@ -1,0 +1,42 @@
+@use "../../../../utility_styles/mixins" as *;
+@use "../../../../utility_styles/variables" as *;
+
+// Edit Flashcard Modal styling
+
+.EditFlashcardModal {
+  .edit-flashcard-heading {
+    margin-bottom: 20px;
+  }
+
+  .edit-flashcard-form {
+    width: 100%;
+    @include displayFlex(column);
+    gap: 20px;
+    margin-bottom: 25px;
+
+    .form-item {
+      width: 100%;
+    }
+
+    .flashcard-question-input,
+    .flashcard-answer-input {
+      height: 100px;
+    }
+
+    .flashcard-topic-display {
+      @include displayFlex(row, flex-start);
+
+      .topic-display-heading {
+        color: $dark-gray;
+        margin-right: 6px;
+      }
+    }
+  }
+
+  .buttons-container {
+    width: 100%;
+    flex: 1;
+    @include displayFlex(row, flex-end, flex-end);
+    gap: 15px;
+  }
+}

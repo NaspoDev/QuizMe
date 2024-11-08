@@ -1,17 +1,25 @@
 import { Flashcard } from "../../../services/FlashcardService";
 import "./EditableFlashcard.scss";
 
+interface EditableFlashcardProps {
+  flashcard: Flashcard;
+  setFlashcardToEdit: React.Dispatch<React.SetStateAction<Flashcard>>;
+}
+
 // A flashcard element that can be used to edit said flashcard.
 // Used in the Flashcards page.
-function EditableFlashcard({ id, question, answer }: Flashcard) {
+function EditableFlashcard({
+  flashcard,
+  setFlashcardToEdit,
+}: EditableFlashcardProps) {
   // The html id to apply to this EditableFlashcard flashcard container div.
-  const flashcardContainerId: string = `flashcard-container-${id}`;
+  const flashcardContainerId: string = `flashcard-container-${flashcard.id}`;
 
   return (
     <div className="EditableFlashcard text-sm">
       <div className="container" id={flashcardContainerId}>
         <div className="front-face">
-          <p className="question">{question}</p>
+          <p className="question">{flashcard.question}</p>
           <div className="buttons">
             <span
               className="material-symbols-rounded card-option-button"
@@ -19,7 +27,10 @@ function EditableFlashcard({ id, question, answer }: Flashcard) {
             >
               sync
             </span>
-            <span className="material-symbols-rounded card-option-button">
+            <span
+              className="material-symbols-rounded card-option-button"
+              onClick={() => setFlashcardToEdit(flashcard)}
+            >
               edit
             </span>
             <span className="material-symbols-rounded card-option-button">
@@ -31,7 +42,7 @@ function EditableFlashcard({ id, question, answer }: Flashcard) {
         <div className="back-face">
           <div className="answer-container">
             <p className="answer-heading">Answer:</p>
-            <p className="answer">{answer}</p>
+            <p className="answer">{flashcard.answer}</p>
           </div>
 
           <div className="buttons">
@@ -41,7 +52,10 @@ function EditableFlashcard({ id, question, answer }: Flashcard) {
             >
               sync
             </span>
-            <span className="material-symbols-rounded card-option-button">
+            <span
+              className="material-symbols-rounded card-option-button"
+              onClick={() => setFlashcardToEdit(flashcard)}
+            >
               edit
             </span>
             <span className="material-symbols-rounded card-option-button">
