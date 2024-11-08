@@ -3,6 +3,7 @@ import "./EditableFlashcard.scss";
 
 interface EditableFlashcardProps {
   flashcard: Flashcard;
+  // Used when the edit button is pressed.
   setFlashcardToEdit: React.Dispatch<React.SetStateAction<Flashcard>>;
 }
 
