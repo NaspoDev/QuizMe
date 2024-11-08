@@ -1,0 +1,17 @@
+@use "../../../../utility_styles/mixins" as *;
+@use "../../../../utility_styles/variables" as *;
+
+// Delete Topic Confirmation Modal styling
+
+.DeleteTopicConfirmationModal {
+  .confirm-delete-prompt {
+    margin-bottom: 20px;
+  }
+
+  .buttons-container {
+    @include displayFlex(row, flex-end, flex-end);
+    width: 100%;
+    flex: 1;
+    gap: 15px;
+  }
+}

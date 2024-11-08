@@ -14,7 +14,7 @@ function DeleteTopicConfirmationModal({
       closeModal={closeModal}
       additionalClasses="DeleteTopicConfirmationModal"
     >
-      <h3 className="confirm-delete-prompt">
+      <h3 className="confirm-delete-prompt font-bold">
         Are you sure you want to delete this topic?
       </h3>
       <p className="delete-all-flashcards-warning">

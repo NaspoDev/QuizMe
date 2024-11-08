@@ -24,23 +24,21 @@ function TopicsPage() {
       <h1 className="topics-heading text-2xl font-bold">Your Topics</h1>
       <div className="topics-display">
         {topics.map((topic) => (
-          <Link
-            to={`/topics/${topic.id}/${topic.name}`}
-            className="topic-card font-semibold button"
-            key={topic.id}
-          >
-            <div className="info-container">
+          <div className="topic-card font-semibold button" key={topic.id}>
+            <Link
+              to={`/topics/${topic.id}/${topic.name}`}
+              className="info-container"
+            >
               <p className="topic-name">{topic.name}</p>
               <div className="number-of-flashcards-container">
                 <span className="material-symbols-rounded flashcard-icon">
                   quiz
                 </span>
-
                 <p className="topic-number-of-flashcards font-light">
                   {topic.numberOfFlashcards} cards
                 </p>
               </div>
-            </div>
+            </Link>
             <div className="delete-button-container">
               <span
                 className="material-symbols-rounded delete-icon-button"
@@ -49,7 +47,7 @@ function TopicsPage() {
                 delete
               </span>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
       {/* add new topic button */}

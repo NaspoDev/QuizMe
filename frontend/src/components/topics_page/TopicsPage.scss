@@ -27,8 +27,11 @@
       background-color: $theme-color-orange;
       padding: 20px 18px;
       border-radius: 10px;
+      cursor: auto;
 
       .info-container {
+        all: unset;
+        cursor: pointer;
         flex: 6;
         @include displayFlex(column, center, flex-start);
         gap: 15px;
@@ -57,6 +60,7 @@
 
         .delete-icon-button {
           font-size: 26px;
+          cursor: pointer;
           transition: all 0.2s;
 
           &:hover {
