@@ -14,34 +14,55 @@
   }
 
   .topics-display {
-    display: grid;
-    grid-template-columns: 300px 300px;
+    @include displayFlex(column);
     width: 100%;
-
-    justify-content: space-evenly;
-    row-gap: 50px;
-
     overflow-y: auto;
     padding-bottom: 70px;
+    gap: 50px;
 
     .topic-card {
-      @include displayFlex(row, space-between);
+      @include displayFlex();
+      width: 500px;
       color: $text-color-white;
       background-color: $theme-color-orange;
-      padding: 25px 18px;
+      padding: 20px 18px;
       border-radius: 10px;
 
-      .topic-name {
-        width: 100%;
-        overflow: hidden;
-        text-wrap: nowrap;
-        text-overflow: ellipsis;
-        padding-right: 20px;
+      .info-container {
+        flex: 6;
+        @include displayFlex(column, center, flex-start);
+        gap: 15px;
+
+        .topic-name {
+          width: 100%;
+          overflow: hidden;
+          text-wrap: nowrap;
+          text-overflow: ellipsis;
+          padding-right: 20px;
+        }
+
+        .number-of-flashcards-container {
+          @include displayFlex();
+          gap: 5px;
+
+          .flashcard-icon {
+            font-size: 23px;
+          }
+        }
       }
 
-      .details-container {
-        @include displayFlex(row);
-        gap: 8px;
+      .delete-button-container {
+        flex: 1;
+        @include displayFlex();
+
+        .delete-icon-button {
+          font-size: 26px;
+          transition: all 0.2s;
+
+          &:hover {
+            color: $danger-red;
+          }
+        }
       }
     }
   }
