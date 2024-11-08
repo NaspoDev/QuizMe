@@ -30,7 +30,14 @@ class FlashcardService {
   }
 
   async createFlashcard(flashcard: Flashcard): Promise<void> {
+    // TODO: implementation
     console.log("New flashcard created on the server!");
+    console.log(flashcard);
+  }
+
+  async updateFlashcard(flashcard: Flashcard): Promise<void> {
+    // TODO: implementation
+    console.log("Updated flashcard on the server!");
     console.log(flashcard);
   }
 }

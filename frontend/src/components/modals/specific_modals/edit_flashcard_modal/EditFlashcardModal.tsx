@@ -79,14 +79,22 @@ function EditFlashcardModal({
     }
 
     if (questionInputValue.length > 0 && answerInputValue.length > 0) {
-      // Update flashcard object.
-      flashcardToEdit.question = questionInputValue;
-      flashcardToEdit.answer = answerInputValue;
+      // Create an updated flashcard object.
+      const updatedFlashcard: Flashcard = {
+        id: flashcardToEdit.id,
+        question: questionInputValue,
+        answer: answerInputValue,
+        topicId: flashcardToEdit.topicId,
+      };
 
-      // Update flashcard locally.
-      // setFlashcards([...flashcards, newFlashcard]);
+      // Updating the flashcards state array.
+      const updatedFlashcards: Flashcard[] = flashcards.map((flashcard) =>
+        flashcard.id == flashcardToEdit.id ? updatedFlashcard : flashcard
+      );
+      setFlashcards(updatedFlashcards);
+
       // Update flashcard on the server.
-      // flashcardService.createFlashcard(newFlashcard);
+      flashcardService.updateFlashcard(updatedFlashcard);
     }
 
     closeModal();
