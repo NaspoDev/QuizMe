@@ -29,7 +29,7 @@
       border-radius: 10px;
 
       .info-container {
-        flex: 6;
+        flex: 5;
         @include displayFlex(column, center, flex-start);
         gap: 15px;
 
@@ -51,9 +51,20 @@
         }
       }
 
-      .delete-button-container {
+      .buttons-container {
         flex: 1;
-        @include displayFlex();
+        @include displayFlex(row, space-between);
+        height: 100%;
+
+        .edit-icon-button {
+          font-size: 26px;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            color: $theme-color-yellow;
+          }
+        }
 
         .delete-icon-button {
           font-size: 26px;

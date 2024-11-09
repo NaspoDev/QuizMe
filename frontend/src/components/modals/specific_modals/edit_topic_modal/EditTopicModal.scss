@@ -1,0 +1,25 @@
+@use "../../../../utility_styles/mixins" as *;
+@use "../../../../utility_styles/variables" as *;
+
+// Edit Topic Modal styling
+
+.EditTopicModal {
+  .edit-topic-heading {
+    margin-bottom: 20px;
+  }
+
+  .edit-topic-form {
+    width: 100%;
+
+    .topic-name-input {
+      width: 100%;
+    }
+  }
+
+  .buttons-container {
+    width: 100%;
+    flex: 1;
+    @include displayFlex(row, flex-end, flex-end);
+    gap: 15px;
+  }
+}
