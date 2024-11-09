@@ -42,6 +42,17 @@ class TopicService {
     console.log("New topic created on the server!");
     console.log(topic);
   }
+
+  async updateTopic(topic: Topic): Promise<void> {
+    // TODO: implementation
+    console.log(topic);
+  }
+
+  // Deleting a topic also involves deleting all flashcards associated with that topic.
+  async deleteTopic(topic: Topic): Promise<void> {
+    // TODO: implementation
+    console.log(topic);
+  }
 }
 
 const topicService: TopicService = new TopicService();

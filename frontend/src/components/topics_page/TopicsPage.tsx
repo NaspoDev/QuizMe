@@ -10,6 +10,13 @@ function TopicsPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [isAddTopicModalOpen, setIsAddTopicModalOpen] =
     useState<boolean>(false);
+
+  // This will be set with whatever topic that the user clicked to delete.
+  // 'setTopicToDelete' is called when the user presses the edit button on a topic card.
+  // Used by DeleteTopicConfirmationModal to get info about the topic that may be deleted,
+  // and to act on it if the deletion is confirmed.
+  // prettier-ignore
+  const [topicToDelete, setTopicToDelete] = useState<Topic | null>(null);
   const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] =
     useState<boolean>(false);
 
@@ -45,7 +52,7 @@ function TopicsPage() {
             <div className="delete-button-container">
               <span
                 className="material-symbols-rounded delete-icon-button"
-                onClick={(event) => handleDeleteButtonClick(event)}
+                onClick={(event) => handleDeleteButtonClick(event, topic)}
               >
                 delete
               </span>
@@ -69,6 +76,9 @@ function TopicsPage() {
       <DeleteTopicConfirmationModal
         isOpen={isDeleteConfirmationModalOpen}
         closeModal={closeDeleteConfirmationModal}
+        topics={topics}
+        setTopics={setTopics}
+        topicToDelete={topicToDelete}
       />
     </div>
   );
@@ -80,11 +90,13 @@ function TopicsPage() {
 
   // Opens the delete confirmation modal when the delete topic button is pressed.
   function handleDeleteButtonClick(
-    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    topic: Topic
   ): void {
     // The delete button is inside of topic card, which has it's own click listener.
     // Stopping the event propagation so that the topic's click event isn't called.
     event.stopPropagation();
+    setTopicToDelete(topic);
     openDeleteConfirmationModal();
   }
 
