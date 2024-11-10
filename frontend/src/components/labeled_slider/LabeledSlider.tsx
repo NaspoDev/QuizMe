@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./LabeledSlider.scss";
 
 interface LabeledSliderProps {
@@ -7,6 +7,7 @@ interface LabeledSliderProps {
   defaultValue: number;
   htmlSliderId: string;
   label: string;
+  labelPostfix?: string;
   additionalClasses?: string;
 }
 
@@ -17,6 +18,7 @@ function LabeledSlider({
   defaultValue,
   htmlSliderId,
   label,
+  labelPostfix,
   additionalClasses,
 }: LabeledSliderProps) {
   const [value, setValue] = useState<string>(defaultValue.toString());
@@ -27,7 +29,10 @@ function LabeledSlider({
         <label htmlFor={htmlSliderId} className="font-semibold">
           {label}
         </label>
-        <p className="slider-value-display">{value}</p>
+        <p className="slider-value-display">
+          {value}
+          {labelPostfix}
+        </p>
       </div>
 
       <input

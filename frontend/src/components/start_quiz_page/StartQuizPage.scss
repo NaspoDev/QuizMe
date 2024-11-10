@@ -23,13 +23,31 @@
     .form-item {
       width: 300px;
       @include displayFlex(column, center, flex-start);
+      gap: 10px;
     }
 
     .topic-selection {
-      gap: 10px;
-
       .quiz-topic-selection {
         width: 100%;
+      }
+    }
+
+    .timed-quiz-selection-container {
+      @include displayFlex(column, center, flex-start);
+
+      .timed-quiz-options-container {
+        @include displayFlex();
+        gap: 30px;
+
+        .timed-quiz-option-container {
+          @include displayFlex();
+
+          .timed-quiz-option {
+            margin-right: 6px;
+            height: 20px;
+            width: 20px;
+          }
+        }
       }
     }
   }
