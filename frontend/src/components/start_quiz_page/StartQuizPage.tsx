@@ -5,6 +5,8 @@ import LabeledSlider from "../labeled_slider/LabeledSlider";
 
 function StartQuizPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
+  const [quizTimeSelectionDisplayed, setQuizTimeSelectionDisplayed] =
+    useState<boolean>(false);
 
   useEffect(() => {
     // Call backend api to get the user's topics.
@@ -51,6 +53,7 @@ function StartQuizPage() {
                 name="timed-quiz-option"
                 className="timed-quiz-option"
                 defaultChecked
+                onChange={hideQuizTimeSelection}
               />
               <label htmlFor="timed-quiz-option-false">No</label>
             </div>
@@ -61,24 +64,35 @@ function StartQuizPage() {
                 value="Yes"
                 name="timed-quiz-option"
                 className="timed-quiz-option"
+                onChange={showQuizTimeSelection}
               />
               <label htmlFor="timed-quiz-option-true">Yes</label>
             </div>
           </div>
         </div>
 
-        <LabeledSlider
-          minValue={0}
-          maxValue={60}
-          defaultValue={15}
-          htmlSliderId="quiz-time-selection-input"
-          label="Time Per Question:"
-          labelPostfix="s"
-          additionalClasses="form-item"
-        />
+        {quizTimeSelectionDisplayed && (
+          <LabeledSlider
+            minValue={0}
+            maxValue={60}
+            defaultValue={15}
+            htmlSliderId="quiz-time-selection-input"
+            label="Time Per Question:"
+            labelPostfix="s"
+            additionalClasses="form-item"
+          />
+        )}
       </form>
     </div>
   );
+
+  function showQuizTimeSelection(): void {
+    setQuizTimeSelectionDisplayed(true);
+  }
+
+  function hideQuizTimeSelection(): void {
+    setQuizTimeSelectionDisplayed(false);
+  }
 }
 
 export default StartQuizPage;
