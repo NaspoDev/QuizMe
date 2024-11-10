@@ -4,6 +4,7 @@ import LandingPage from "./components/landing_page/LandingPage";
 import { Route, Routes, useLocation } from "react-router-dom";
 import TopicsPage from "./components/topics_page/TopicsPage";
 import FlashcardsPage from "./components/flashcards_page/FlashcardsPage";
+import StartQuizPage from "./components/start_quiz_page/StartQuizPage";
 
 function App() {
   const location = useLocation();
@@ -20,7 +21,7 @@ function App() {
             <Route path=":topicId/:topicName" element={<FlashcardsPage />} />
           </Route>
 
-          <Route path="/start-quiz" element={<LandingPage />} />
+          <Route path="/start-quiz" element={<StartQuizPage />} />
           <Route path="/active-quiz" element={<LandingPage />} />
         </Routes>
       </div>

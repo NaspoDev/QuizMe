@@ -28,8 +28,8 @@ function Sidebar({ pathname }: SidebarProps) {
           </Link>
         )}
 
-        {/* Flashcards or Topics page */}
-        {pathname.startsWith("/topics") && (
+        {/* Topics page(s), start quiz page */}
+        {(pathname.startsWith("/topics") || pathname == "/start-quiz") && (
           <>
             <Link
               to="/topics"

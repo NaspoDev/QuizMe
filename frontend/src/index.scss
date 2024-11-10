@@ -88,7 +88,8 @@ button {
   cursor: pointer;
 }
 
-input,
+// text input and textarea styling
+input[type="text"],
 textarea {
   outline: none;
   border: none;

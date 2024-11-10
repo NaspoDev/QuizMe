@@ -1,0 +1,36 @@
+@use "../../utility_styles/mixins" as *;
+@use "../../utility_styles/variables" as *;
+
+// Start Quiz Page styling
+
+.StartQuizPage {
+  width: 100%;
+  height: 100%;
+  @include displayFlex(column, flex-start);
+  padding: 50px 50px 0px 50px;
+
+  .start-quiz-heading {
+    margin-bottom: 70px;
+  }
+
+  .start-quiz-form {
+    @include displayFlex(column);
+    gap: 50px;
+    // background-color: $theme-color-orange;
+    border-radius: 10px;
+    padding: 20px;
+
+    .form-item {
+      width: 300px;
+      @include displayFlex(column, center, flex-start);
+    }
+
+    .topic-selection {
+      gap: 10px;
+
+      .quiz-topic-selection {
+        width: 100%;
+      }
+    }
+  }
+}
