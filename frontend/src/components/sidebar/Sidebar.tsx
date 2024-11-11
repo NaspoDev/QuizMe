@@ -51,7 +51,7 @@ function Sidebar({ pathname }: SidebarProps) {
           <>
             <Link
               to="/topics"
-              className="button sidebar-button sidebar-button-orange"
+              className="button sidebar-button sidebar-button-red"
             >
               End Quiz
             </Link>

@@ -36,6 +36,11 @@
     .sidebar-button-green {
       background-color: $success-green;
     }
+
+    .sidebar-button-red {
+      background-color: $danger-red;
+      border: 2px solid $background-color-white;
+    }
   }
 
   .developer-credits-container {

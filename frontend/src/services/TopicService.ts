@@ -25,16 +25,17 @@ class TopicService {
     return topics;
   }
 
-  async getTopic(topicId: string): Promise<Topic | null> {
+  async getTopic(topicId: string): Promise<Topic> {
     // TODO: implementation
-    console.log(topicId);
     for (const topic of topics) {
       if (topic.id == topicId) {
         return topic;
       }
     }
 
-    return null;
+    throw new Error(
+      `Could not find topic with topic id: ${topicId}. It's probably an invalid topic id.`
+    );
   }
 
   async createTopic(topic: Topic): Promise<void> {
