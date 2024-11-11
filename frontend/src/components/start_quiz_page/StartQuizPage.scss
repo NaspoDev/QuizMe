@@ -15,15 +15,17 @@
 
   .start-quiz-form {
     @include displayFlex(column);
-    gap: 50px;
-    // background-color: $theme-color-orange;
+    gap: 30px;
     border-radius: 10px;
     padding: 20px;
 
     .form-item {
-      width: 300px;
+      width: 400px;
       @include displayFlex(column, center, flex-start);
-      gap: 10px;
+      gap: 20px;
+      background-color: rgba($color: $light-gray, $alpha: 0.5);
+      padding: 15px;
+      border-radius: 10px;
     }
 
     .topic-selection {
@@ -49,6 +51,11 @@
           }
         }
       }
+    }
+
+    .submit-button-container {
+      width: 100%;
+      @include displayFlex(row, flex-end);
     }
   }
 }

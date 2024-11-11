@@ -17,7 +17,10 @@ function StartQuizPage() {
   return (
     <div className="StartQuizPage">
       <h1 className="start-quiz-heading text-2xl font-bold">Start a Quiz</h1>
-      <form className="start-quiz-form">
+      <form
+        className="start-quiz-form"
+        onSubmit={(event) => handleStartQuiz(event)}
+      >
         <div className="topic-selection form-item">
           <label htmlFor="quiz-topic-selection" className="font-semibold">
             Select Topic:
@@ -82,6 +85,15 @@ function StartQuizPage() {
             additionalClasses="form-item"
           />
         )}
+
+        <div className="submit-button-container">
+          <button
+            type="submit"
+            className="button button-success quiz-start-submit-button"
+          >
+            Start Quiz
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -92,6 +104,11 @@ function StartQuizPage() {
 
   function hideQuizTimeSelection(): void {
     setQuizTimeSelectionDisplayed(false);
+  }
+
+  // Start a quiz based on the selection in the form.
+  function handleStartQuiz(event: React.FormEvent<HTMLFormElement>): void {
+    // TODO: implement logic
   }
 }
 
