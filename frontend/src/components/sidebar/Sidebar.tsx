@@ -45,6 +45,18 @@ function Sidebar({ pathname }: SidebarProps) {
             </Link>
           </>
         )}
+
+        {/* Topics page(s), start quiz page */}
+        {pathname.startsWith("/active-quiz") && (
+          <>
+            <Link
+              to="/topics"
+              className="button sidebar-button sidebar-button-orange"
+            >
+              End Quiz
+            </Link>
+          </>
+        )}
       </div>
 
       {/* Crediting myself */}

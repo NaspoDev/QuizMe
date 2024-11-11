@@ -5,6 +5,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import TopicsPage from "./components/topics_page/TopicsPage";
 import FlashcardsPage from "./components/flashcards_page/FlashcardsPage";
 import StartQuizPage from "./components/start_quiz_page/StartQuizPage";
+import ActiveQuizPage from "./components/active_quiz/ActiveQuizPage";
 
 function App() {
   const location = useLocation();
@@ -22,7 +23,10 @@ function App() {
           </Route>
 
           <Route path="/start-quiz" element={<StartQuizPage />} />
-          <Route path="/active-quiz" element={<LandingPage />} />
+          <Route
+            path="/active-quiz/:topicId/:timeSeconds"
+            element={<ActiveQuizPage />}
+          />
         </Routes>
       </div>
     </div>

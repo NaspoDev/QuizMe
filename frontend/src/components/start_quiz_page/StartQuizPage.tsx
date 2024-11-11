@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import "./StartQuizPage.scss";
 import topicService, { Topic } from "../../services/TopicService";
 import LabeledSlider from "../labeled_slider/LabeledSlider";
+import { useNavigate } from "react-router-dom";
 
 function StartQuizPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [quizTimeSelectionDisplayed, setQuizTimeSelectionDisplayed] =
     useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Call backend api to get the user's topics.
@@ -76,7 +78,7 @@ function StartQuizPage() {
 
         {quizTimeSelectionDisplayed && (
           <LabeledSlider
-            minValue={0}
+            minValue={1}
             maxValue={60}
             defaultValue={15}
             htmlSliderId="quiz-time-selection-input"
@@ -108,7 +110,33 @@ function StartQuizPage() {
 
   // Start a quiz based on the selection in the form.
   function handleStartQuiz(event: React.FormEvent<HTMLFormElement>): void {
-    // TODO: implement logic
+    event.preventDefault();
+    const topicSelectionElement: HTMLSelectElement = document.getElementById(
+      "quiz-topic-selection"
+    ) as HTMLSelectElement;
+    const timedQuizOptionTrue: HTMLInputElement = document.getElementById(
+      "timed-quiz-option-true"
+    ) as HTMLInputElement;
+
+    const topicId: string = topicSelectionElement.value;
+
+    // If a timed quiz is not selected, navigate to active-quiz.
+    // (Pass in '0' for time param as 0 will represent unlimited time).
+    if (!timedQuizOptionTrue.checked) {
+      console.log("not timed");
+      navigate(`/active-quiz/${topicId}/0`);
+      return;
+    }
+
+    // Otherwise, a timed quiz has been selected.
+    // Get the time selection from the time selection slider element.
+    const quizTimeSelectionElement: HTMLInputElement = document.getElementById(
+      "quiz-time-selection-input"
+    ) as HTMLInputElement;
+    const timePerQuestionSec: string = quizTimeSelectionElement.value;
+
+    // Navigate to active-quiz with the respective time param.
+    navigate(`/active-quiz/${topicId}/${timePerQuestionSec}`);
   }
 }
 
