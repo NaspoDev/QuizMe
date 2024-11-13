@@ -3,6 +3,7 @@ import "./ActiveQuizPage.scss";
 import { useEffect, useState } from "react";
 import flashcardService, { Flashcard } from "../../services/FlashcardService";
 import topicService from "../../services/TopicService";
+import QuizFlashcard from "./quiz_flashcard/QuizFlashcard";
 
 // Active Quiz Page component.
 function ActiveQuizPage() {
@@ -42,7 +43,11 @@ function ActiveQuizPage() {
       <p className="quiz-progress-numeric font-light">
         {quizProgress}/{flashcards.length}
       </p>
-      <div className="flashcard">flashcard</div>
+      {/* Wait for flashcards to shuffle & set */}
+      {flashcards.length > 0 && (
+        // Display the flashcard at the index of quiz progress - 1
+        <QuizFlashcard flashcard={flashcards[quizProgress - 1]} />
+      )}
       <p className="flip-flashcard-prompt text-sm font-light">
         Click the card to see the answer.
       </p>
