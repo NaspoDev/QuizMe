@@ -7,7 +7,7 @@ interface QuizFlashcardProps {
 
 // The flashcard component used in quizzes.
 function QuizFlashcard({ flashcard }: QuizFlashcardProps) {
-  // The html id to apply to this QuizFlashcard flashcard container div.
+  // The html id to apply to this EditableFlashcard flashcard container div.
   const flashcardContainerId: string = `flashcard-container-${flashcard.id}`;
 
   return (

@@ -51,7 +51,13 @@ function ActiveQuizPage() {
       {/* Wait for flashcards to shuffle & set */}
       {flashcards.length > 0 && (
         // Display the flashcard at the index of quiz progress - 1
-        <QuizFlashcard flashcard={flashcards[quizProgress - 1]} />
+        <QuizFlashcard
+          flashcard={flashcards[quizProgress - 1]}
+          // Passing a key in so that a completely new instance of the component
+          // renders when the flashcard changes, therefore resetting the flashcard
+          // orientation without having to do it manually.
+          key={quizProgress}
+        />
       )}
 
       <p className="flip-flashcard-prompt text-sm font-light">
