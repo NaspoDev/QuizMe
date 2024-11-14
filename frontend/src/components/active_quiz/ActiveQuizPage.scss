@@ -39,7 +39,18 @@
     }
 
     .quiz-progress-numeric {
-      margin-bottom: 60px;
+      margin-bottom: 40px;
+    }
+
+    .question-time-remaining-container {
+      @include displayFlex();
+      gap: 5px;
+
+      // This has a defined width so that the text doesn't shift depending
+      // on the size of the number.
+      .question-time-remaining-value {
+        width: 50px;
+      }
     }
   }
 

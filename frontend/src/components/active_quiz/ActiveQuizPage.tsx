@@ -8,15 +8,22 @@ import QuizFlashcard from "./quiz_flashcard/QuizFlashcard";
 // Active Quiz Page component.
 function ActiveQuizPage() {
   // topic of quiz | time per question, in seconds.
+  // 0 seconds means this is not a timed quiz.
   let { topicId, timeSeconds } = useParams();
   topicId = topicId as string;
   timeSeconds = timeSeconds as string;
+  // Converted value of timeSeconds param to number.
+  const secondsPerQuestion: number = Number(timeSeconds);
+  // Boolean variable that makes checking if this is a timed quiz easier.
+  const isTimedQuiz: boolean = secondsPerQuestion == 0 ? false : true;
 
   const navigate = useNavigate();
 
   const [topicName, setTopicName] = useState<string>("");
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [quizProgress, setQuizProgress] = useState<number>(1);
+  const [questionTimeRemaining, setQuestionTimeRemaining] =
+    useState<number>(secondsPerQuestion);
 
   useEffect(() => {
     // Get topic name
@@ -32,6 +39,35 @@ function ActiveQuizPage() {
     });
   }, []);
 
+  // Sets the timer for a timed quiz.
+  // Works by defining a setTimeout() method that updates the time remaining
+  // state variable, which is a dependency of this useState(), which then calls it again.
+  useEffect(() => {
+    // If it's not a timed quiz, return.
+    if (!isTimedQuiz) {
+      return;
+    }
+
+    // If the timer has run out, navigate to the next question.
+    if (questionTimeRemaining <= 0) {
+      navigateQuizNext();
+    }
+
+    // Set a 1 second timeout that updates the questionTimeRemaining state variable.
+    const timer = setTimeout(() => {
+      setQuestionTimeRemaining(questionTimeRemaining - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [questionTimeRemaining]);
+
+  // Reset the timer whenever the quiz navigates.
+  useEffect(() => {
+    if (isTimedQuiz) {
+      setQuestionTimeRemaining(secondsPerQuestion);
+    }
+  }, [quizProgress]);
+
   return (
     <div className="ActiveQuizPage">
       <div className="heading-area">
@@ -46,6 +82,16 @@ function ActiveQuizPage() {
         <p className="quiz-progress-numeric font-light">
           {quizProgress}/{flashcards.length}
         </p>
+        {isTimedQuiz && (
+          <div className="question-time-remaining-container">
+            <p className="question-time-remaining-text font-light">
+              Time remaining for this question:{" "}
+            </p>
+            <p className="question-time-remaining-value font-semibold">
+              {questionTimeRemaining}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Wait for flashcards to shuffle & set */}
@@ -104,7 +150,11 @@ function ActiveQuizPage() {
 
   // Navigates the quiz to the next flashcard.
   function navigateQuizNext(): void {
-    setQuizProgress(quizProgress + 1);
+    if (quizProgress == flashcards.length) {
+      completeQuiz();
+    } else {
+      setQuizProgress(quizProgress + 1);
+    }
   }
 
   // Navigates the quiz to the previous flashcard.
