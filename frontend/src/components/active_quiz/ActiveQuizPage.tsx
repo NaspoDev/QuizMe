@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ActiveQuizPage.scss";
 import { useEffect, useState } from "react";
 import flashcardService, { Flashcard } from "../../services/FlashcardService";
@@ -11,6 +11,8 @@ function ActiveQuizPage() {
   let { topicId, timeSeconds } = useParams();
   topicId = topicId as string;
   timeSeconds = timeSeconds as string;
+
+  const navigate = useNavigate();
 
   const [topicName, setTopicName] = useState<string>("");
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
@@ -55,8 +57,59 @@ function ActiveQuizPage() {
       <p className="flip-flashcard-prompt text-sm font-light">
         Click the card to see the answer.
       </p>
+
+      {/* quiz navigation buttons */}
+      {/* If we are not at the last flashcard, show the next flashcard button.
+      Otherwise, show the complete quiz button. */}
+      {quizProgress < flashcards.length ? (
+        <button
+          className="next-flashcard-button icon-button icon-button-orange"
+          onClick={navigateQuizNext}
+        >
+          <span className="material-symbols-rounded text-3xl">
+            arrow_forward
+          </span>
+        </button>
+      ) : (
+        <button
+          className="complete-quiz-button icon-button icon-button-green"
+          onClick={navigateQuizNext}
+        >
+          <span
+            className="material-symbols-rounded text-3xl"
+            onClick={completeQuiz}
+          >
+            done_outline
+          </span>
+        </button>
+      )}
+
+      {/* If quiz progress > 1, show the back button. */}
+      {quizProgress > 1 && (
+        <button
+          className="previous-flashcard-button icon-button icon-button-orange"
+          onClick={navigateQuizPrevious}
+        >
+          <span className="material-symbols-rounded text-3xl">arrow_back</span>
+        </button>
+      )}
     </div>
   );
+
+  // Navigates the quiz to the next flashcard.
+  function navigateQuizNext(): void {
+    setQuizProgress(quizProgress + 1);
+  }
+
+  // Navigates the quiz to the previous flashcard.
+  function navigateQuizPrevious(): void {
+    setQuizProgress(quizProgress - 1);
+  }
+
+  // Exits the quiz and returns to topics page.
+  function completeQuiz(): void {
+    navigate("/topics");
+  }
 
   // Shuffle the flashcards array using the Fisher-Yates shuffle algorithm.
   // Returns the provided array shuffled.
