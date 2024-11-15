@@ -1,5 +1,6 @@
 @use "../../utility_styles/mixins" as *;
 @use "../../utility_styles/variables" as *;
+@use "./flashcards_page_variables" as flashcardsPageVars;
 
 // Flashcards Page styling
 
@@ -19,7 +20,13 @@
 
     .flashcards-display {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(
+          flashcardsPageVars.$editable-flashcard-width,
+          flashcardsPageVars.$editable-flashcard-width
+        )
+      );
       height: 100%;
       overflow-y: auto;
       gap: 30px;

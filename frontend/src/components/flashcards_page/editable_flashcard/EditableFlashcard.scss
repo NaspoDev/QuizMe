@@ -1,11 +1,12 @@
 @use "../../../utility_styles/mixins" as *;
 @use "../../../utility_styles/variables" as *;
+@use "../flashcards_page_variables" as flashcardsPageVars;
 
 // Editable Flashcard styling
 
 // Majority of this styling is the flip effect.
 .EditableFlashcard {
-  width: 220px;
+  width: flashcardsPageVars.$editable-flashcard-width;
   height: 240px;
   position: relative;
 
@@ -47,6 +48,7 @@
       }
 
       .answer-container {
+        flex: 1;
         overflow: hidden;
         // fade out effect for overflow
         mask-image: linear-gradient(180deg, black 60%, transparent);
