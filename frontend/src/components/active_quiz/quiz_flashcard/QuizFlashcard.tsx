@@ -10,10 +10,18 @@ function QuizFlashcard({ flashcard }: QuizFlashcardProps) {
   // The html id to apply to this EditableFlashcard flashcard container div.
   const flashcardContainerId: string = `flashcard-container-${flashcard.id}`;
 
+  // Boolean variable to see if the client is a Firefox browser.
+  // Used to apply custom styling for Firefox clients.
+  const isFirefox: boolean = navigator.userAgent
+    .toLowerCase()
+    .includes("firefox")
+    ? true
+    : false;
+
   return (
     <div className="QuizFlashcard text-lg font-semibold">
       <div
-        className="container"
+        className={`container ${isFirefox ? "firefox-container" : ""}`.trim()}
         id={flashcardContainerId}
         onClick={flipFlashcard}
       >
@@ -21,7 +29,9 @@ function QuizFlashcard({ flashcard }: QuizFlashcardProps) {
           <p className="question">{flashcard.question}</p>
         </div>
 
-        <div className="back-face">
+        <div
+          className={`back-face ${isFirefox ? "firefox-back-face" : ""}`.trim()}
+        >
           <div className="answer-container">
             <p className="answer-heading">Answer:</p>
             <p className="answer">{flashcard.answer}</p>

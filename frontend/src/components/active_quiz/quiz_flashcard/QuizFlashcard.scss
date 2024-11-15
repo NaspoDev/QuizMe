@@ -52,4 +52,15 @@
       }
     }
   }
+
+  // Firefox has buggy behaviour with backface-visibility,
+  // so I have to apply some additional styles only on firefox browsers
+  // to achieve the desired affect. (Applied through JS).
+  .firefox-container {
+    backface-visibility: hidden;
+  }
+  .firefox-back-face {
+    background-color: $beige;
+    border-radius: 20px;
+  }
 }
