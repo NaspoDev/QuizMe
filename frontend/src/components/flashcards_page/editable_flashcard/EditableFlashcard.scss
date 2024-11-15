@@ -41,13 +41,16 @@
 
       .question {
         overflow: hidden;
-        text-overflow: ellipsis;
         flex-grow: 1;
         // fade out effect for overflow
         mask-image: linear-gradient(180deg, black 60%, transparent);
       }
 
       .answer-container {
+        overflow: hidden;
+        // fade out effect for overflow
+        mask-image: linear-gradient(180deg, black 60%, transparent);
+
         .answer-heading {
           color: $dark-gray;
           margin-bottom: 8px;
