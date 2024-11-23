@@ -19,9 +19,8 @@ const topics: Topic[] = [
 ];
 
 class TopicService {
-  async getUserTopics(userId: string): Promise<Topic[]> {
+  async getUserTopics(): Promise<Topic[]> {
     // TODO: implementation
-    console.log(userId);
     return topics;
   }
 

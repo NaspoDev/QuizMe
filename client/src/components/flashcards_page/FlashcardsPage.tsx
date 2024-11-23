@@ -30,9 +30,7 @@ function FlashcardsPage() {
   // Call backend api to get the user's flashcards.
   useEffect(() => {
     // TODO: pass in proper user ID
-    flashcardService
-      .getUserFlashcardsByTopic("123", topicId)
-      .then(setFlashcards);
+    flashcardService.getUserFlashcardsByTopic(topicId).then(setFlashcards);
   }, []);
 
   // Opens the Edit Flashcard Modal whenever the 'flashcardToEdit' changes.

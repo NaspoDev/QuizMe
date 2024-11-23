@@ -34,7 +34,7 @@ function ActiveQuizPage() {
 
     // Get topic flashcards, then call to shuffle them.
     // TODO: pass in proper user ID
-    flashcardService.getUserFlashcardsByTopic("123", topicId).then((data) => {
+    flashcardService.getUserFlashcardsByTopic(topicId).then((data) => {
       setFlashcards(shuffleFlashcards(data));
     });
   }, []);

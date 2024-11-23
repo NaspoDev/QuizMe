@@ -9,15 +9,10 @@ export interface Flashcard {
 }
 
 class FlashcardService {
-  async getUserFlashcardsByTopic(
-    userId: string,
-    topicId: string
-  ): Promise<Flashcard[]> {
+  async getUserFlashcardsByTopic(topicId: string): Promise<Flashcard[]> {
     // TODO: implementation
 
     // filler implementation
-    console.log(userId);
-
     const result: Flashcard[] = [];
 
     for (const card of flashcards) {

@@ -32,8 +32,7 @@ function TopicsPage() {
 
   useEffect(() => {
     // Call backend api to get the user's topics.
-    // TODO: pass in proper ID
-    topicService.getUserTopics("123").then(setTopics);
+    topicService.getUserTopics().then(setTopics);
   }, []);
 
   return (
