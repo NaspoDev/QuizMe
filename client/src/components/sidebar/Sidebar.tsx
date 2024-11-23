@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Sidebar.scss";
+import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
+import googleIcon from "../../assets/images/google_icon.png";
 
 // Sidebar props.
 // This component should be re-rendered whenever the location changes.
@@ -9,6 +11,11 @@ interface SidebarProps {
 
 // Sidebar component. Always persistent, used to navigate and control the app.
 function Sidebar({ pathname }: SidebarProps) {
+  const googleSignIn = useGoogleLogin({
+    onSuccess: handleGoogleSignInSuccess,
+    onError: handleGoogleSignInFailure,
+  });
+
   return (
     <div className="Sidebar">
       <div className="heading">
@@ -20,12 +27,22 @@ function Sidebar({ pathname }: SidebarProps) {
       <div className="buttons">
         {/* Landing page */}
         {pathname == "/" && (
-          <Link
-            to="/topics"
-            className="button sidebar-button sidebar-button-green"
-          >
-            Get Started!
-          </Link>
+          <>
+            {/* Sign in with Google button */}
+            <button
+              className="button sidebar-button sidebar-button-green google-sign-in-button"
+              onClick={() => googleSignIn()}
+            >
+              <img src={googleIcon} alt="Google Icon" />
+              <p>Sign in with Google</p>
+            </button>
+            <Link
+              to="/topics"
+              className="button sidebar-button sidebar-button-gray"
+            >
+              Continue as Guest
+            </Link>
+          </>
         )}
 
         {/* Topics page(s), start quiz page */}
@@ -74,6 +91,20 @@ function Sidebar({ pathname }: SidebarProps) {
       </div>
     </div>
   );
+
+  async function handleGoogleSignInSuccess(response: TokenResponse) {
+    await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: {
+        Authorization: `Bearer ${response.access_token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+
+  function handleGoogleSignInFailure(): void {
+    console.log("Sign in failed!");
+  }
 }
 
 export default Sidebar;
