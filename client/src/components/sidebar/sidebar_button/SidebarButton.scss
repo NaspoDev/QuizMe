@@ -1,0 +1,26 @@
+@use "../../../utility_styles/mixins" as *;
+@use "../../../utility_styles/variables" as *;
+
+// Sidebar Button Component styling
+
+.SidebarButton {
+  width: 80%;
+
+  // Default sidebar button background color.
+  .sidebar-button-orange {
+    background-color: $theme-color-orange;
+  }
+}
+
+// For if the sidebar button is an icon button.
+.sidebar-icon-button {
+  @include displayFlex();
+  gap: 10px;
+
+  .sidebar-icon-image {
+    width: 25px;
+    // background-color: $text-color-white;
+    // border-radius: 50%;
+    // padding: 3px;
+  }
+}

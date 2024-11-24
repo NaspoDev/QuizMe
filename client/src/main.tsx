@@ -9,6 +9,8 @@ const googleClientId: string =
   "300365749623-7ri9a9627vjc92m9371hanaqf63t8sa6.apps.googleusercontent.com";
 
 createRoot(document.getElementById("root")!).render(
+  // A context provider from the `react-oauth/google` package that makes sure
+  // the app has the necessary credentials (like client id) throughout the app.
   <GoogleOAuthProvider clientId={googleClientId}>
     <StrictMode>
       <BrowserRouter>

@@ -25,10 +25,6 @@
     height: auto;
     gap: 30px;
 
-    .sidebar-button {
-      width: 80%;
-    }
-
     .sidebar-button-orange {
       background-color: $theme-color-orange;
     }
@@ -46,16 +42,11 @@
       background-color: $dark-gray;
     }
 
-    .google-sign-in-button {
-      @include displayFlex();
-      gap: 10px;
-
-      img {
-        width: 25px;
-        background-color: $text-color-white;
-        border-radius: 50%;
-        padding: 3px;
-      }
+    .google-sign-in-button-image {
+      width: 25px;
+      background-color: $text-color-white;
+      border-radius: 50%;
+      padding: 3px;
     }
   }
 

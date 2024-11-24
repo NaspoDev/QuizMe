@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.scss";
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 import googleIcon from "../../assets/images/google_icon.png";
+import SidebarButton from "./sidebar_button/SidebarButton";
 
 // Sidebar props.
 // This component should be re-rendered whenever the location changes.
@@ -11,6 +12,8 @@ interface SidebarProps {
 
 // Sidebar component. Always persistent, used to navigate and control the app.
 function Sidebar({ pathname }: SidebarProps) {
+  const navigate = useNavigate();
+
   const googleSignIn = useGoogleLogin({
     onSuccess: handleGoogleSignInSuccess,
     onError: handleGoogleSignInFailure,
@@ -29,50 +32,44 @@ function Sidebar({ pathname }: SidebarProps) {
         {pathname == "/" && (
           <>
             {/* Sign in with Google button */}
-            <button
-              className="button sidebar-button sidebar-button-green google-sign-in-button"
-              onClick={() => googleSignIn()}
-            >
-              <img src={googleIcon} alt="Google Icon" />
-              <p>Sign in with Google</p>
-            </button>
-            <Link
-              to="/topics"
-              className="button sidebar-button sidebar-button-gray"
-            >
-              Continue as Guest
-            </Link>
+            <SidebarButton
+              text="Sign in With Google"
+              onClick={googleSignIn}
+              iconImage={googleIcon}
+              additionalClasses="sidebar-button-green"
+              additionalImageClasses="google-sign-in-button-image"
+            />
+
+            <SidebarButton
+              text="Continue as Guest"
+              onClick={() => navigate("/topics")}
+              additionalClasses="sidebar-button-gray"
+            />
           </>
         )}
 
         {/* Topics page(s), start quiz page */}
         {(pathname.startsWith("/topics") || pathname == "/start-quiz") && (
           <>
-            <Link
-              to="/topics"
-              className="button sidebar-button sidebar-button-orange"
-            >
-              My Topics
-            </Link>
-            <Link
-              to="/start-quiz"
-              className="button sidebar-button sidebar-button-green"
-            >
-              Start a Quiz
-            </Link>
+            <SidebarButton
+              text="My Topics"
+              onClick={() => navigate("/topics")}
+            />
+            <SidebarButton
+              text="Start a Quiz"
+              onClick={() => navigate("/start-quiz")}
+              additionalClasses="sidebar-button-green"
+            />
           </>
         )}
 
         {/* Topics page(s), start quiz page */}
         {pathname.startsWith("/active-quiz") && (
-          <>
-            <Link
-              to="/topics"
-              className="button sidebar-button sidebar-button-red"
-            >
-              End Quiz
-            </Link>
-          </>
+          <SidebarButton
+            text="End Quiz"
+            onClick={() => navigate("/topics")}
+            additionalClasses="sidebar-button-red"
+          />
         )}
       </div>
 
