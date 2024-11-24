@@ -1,8 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Sidebar.scss";
-import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 import googleIcon from "../../assets/images/google_icon.png";
 import SidebarButton from "./sidebar_button/SidebarButton";
+import useAuth from "../../hooks/useAuth";
+import { useContext } from "react";
+import { AuthStateContext } from "../../providers/AuthStateProvider";
 
 // Sidebar props.
 // This component should be re-rendered whenever the location changes.
@@ -13,17 +15,22 @@ interface SidebarProps {
 // Sidebar component. Always persistent, used to navigate and control the app.
 function Sidebar({ pathname }: SidebarProps) {
   const navigate = useNavigate();
-
-  const googleSignIn = useGoogleLogin({
-    onSuccess: handleGoogleSignInSuccess,
-    onError: handleGoogleSignInFailure,
-  });
+  const { handleGoogleSingIn, handleGuestSignIn, loading } = useAuth();
+  const [user] = useContext(AuthStateContext);
 
   return (
     <div className="Sidebar">
       <div className="heading">
         <h1 className="title font-bold text-2xl">QuizMe</h1>
         <h2 className="subtitle font-light text">A flashcard app.</h2>
+        {/* TODO: Remove this temp h3 tag */}
+        <h3>
+          {!user
+            ? "not signed in"
+            : typeof user == "string"
+            ? user
+            : user.userId}
+        </h3>
       </div>
 
       {/* Buttons container. Buttons change based on current page. */}
@@ -34,7 +41,13 @@ function Sidebar({ pathname }: SidebarProps) {
             {/* Sign in with Google button */}
             <SidebarButton
               text="Sign in With Google"
-              onClick={googleSignIn}
+              onClick={async () => {
+                handleGoogleSingIn();
+                while (loading) {
+                  await new Promise((resolve) => setTimeout(resolve, 100));
+                }
+                navigate("/topics");
+              }}
               iconImage={googleIcon}
               additionalClasses="sidebar-button-green"
               additionalImageClasses="google-sign-in-button-image"
@@ -42,7 +55,10 @@ function Sidebar({ pathname }: SidebarProps) {
 
             <SidebarButton
               text="Continue as Guest"
-              onClick={() => navigate("/topics")}
+              onClick={async () => {
+                await handleGuestSignIn();
+                navigate("/topics");
+              }}
               additionalClasses="sidebar-button-gray"
             />
           </>
@@ -88,20 +104,6 @@ function Sidebar({ pathname }: SidebarProps) {
       </div>
     </div>
   );
-
-  async function handleGoogleSignInSuccess(response: TokenResponse) {
-    await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-      headers: {
-        Authorization: `Bearer ${response.access_token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }
-
-  function handleGoogleSignInFailure(): void {
-    console.log("Sign in failed!");
-  }
 }
 
 export default Sidebar;
