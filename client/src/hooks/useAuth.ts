@@ -4,27 +4,17 @@
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 import { useContext } from "react";
 import { AuthStateContext } from "../providers/AuthStateProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function useAuth() {
   const [user, setUser] = useContext(AuthStateContext);
-  // Loading state for when logging in. (Cannot await since useGoogleLogin
-  // doesn't return a promise).
-  let loading: boolean = false;
+  const navigate = useNavigate();
 
   // Google sign in logic.
   const googleSignIn = useGoogleLogin({
     onSuccess: handleGoogleSignInSuccess,
     onError: handleGoogleSignInFailure,
   });
-
-  async function handleGoogleSignIn(): Promise<void> {
-    loading = true;
-    googleSignIn();
-    // Repeatedly check for loading to be false.
-    while (loading) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-  }
 
   async function handleGoogleSignInSuccess(
     tokenResponse: TokenResponse
@@ -41,25 +31,29 @@ export default function useAuth() {
       );
       const data = await response.json();
       console.log(data);
+      navigateAfterSignIn();
     } catch (error) {
       console.log(
         "Failed to fetch user info from Google api during google sign in."
       );
       console.log(error);
-    } finally {
-      console.log("loading is false!");
-      loading = false;
     }
   }
 
   function handleGoogleSignInFailure(): void {
-    loading = false;
     console.log("Sign in failed!");
   }
 
   async function handleGuestSignIn(): Promise<void> {
     setUser("guest");
+    navigateAfterSignIn();
   }
 
-  return { handleGoogleSignIn, handleGuestSignIn, user };
+  // To be called after sign in processes have been completed.
+  // Navigates to the correct page after sign in.
+  function navigateAfterSignIn(): void {
+    navigate("/topics");
+  }
+
+  return { googleSignIn, handleGuestSignIn, user };
 }
