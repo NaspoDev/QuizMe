@@ -2,14 +2,14 @@
 // Deals with authorization logic and keeps track of the logged in user.
 
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthStateContext } from "../providers/AuthStateProvider";
 
 export default function useAuth() {
   const [user, setUser] = useContext(AuthStateContext);
   // Loading state for when logging in. (Cannot await since useGoogleLogin
   // doesn't return a promise).
-  const [loading, setLoading] = useState<boolean>(false);
+  let loading: boolean = false;
 
   // Google sign in logic.
   const googleSignIn = useGoogleLogin({
@@ -17,9 +17,13 @@ export default function useAuth() {
     onError: handleGoogleSignInFailure,
   });
 
-  function handleGoogleSingIn(): void {
-    setLoading(true);
+  async function handleGoogleSignIn(): Promise<void> {
+    loading = true;
     googleSignIn();
+    // Repeatedly check for loading to be false.
+    while (loading) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
   }
 
   async function handleGoogleSignInSuccess(
@@ -43,11 +47,13 @@ export default function useAuth() {
       );
       console.log(error);
     } finally {
-      setLoading(false);
+      console.log("loading is false!");
+      loading = false;
     }
   }
 
   function handleGoogleSignInFailure(): void {
+    loading = false;
     console.log("Sign in failed!");
   }
 
@@ -55,5 +61,5 @@ export default function useAuth() {
     setUser("guest");
   }
 
-  return { handleGoogleSingIn, handleGuestSignIn, loading, user };
+  return { handleGoogleSignIn, handleGuestSignIn, user };
 }

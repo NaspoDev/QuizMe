@@ -15,7 +15,7 @@ interface SidebarProps {
 // Sidebar component. Always persistent, used to navigate and control the app.
 function Sidebar({ pathname }: SidebarProps) {
   const navigate = useNavigate();
-  const { handleGoogleSingIn, handleGuestSignIn, loading } = useAuth();
+  const { handleGoogleSignIn, handleGuestSignIn } = useAuth();
   const [user] = useContext(AuthStateContext);
 
   return (
@@ -42,10 +42,7 @@ function Sidebar({ pathname }: SidebarProps) {
             <SidebarButton
               text="Sign in With Google"
               onClick={async () => {
-                handleGoogleSingIn();
-                while (loading) {
-                  await new Promise((resolve) => setTimeout(resolve, 100));
-                }
+                await handleGoogleSignIn();
                 navigate("/topics");
               }}
               iconImage={googleIcon}
