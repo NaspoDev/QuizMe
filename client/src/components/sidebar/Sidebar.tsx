@@ -3,8 +3,6 @@ import "./Sidebar.scss";
 import googleIcon from "../../assets/images/google_icon.png";
 import SidebarButton from "./sidebar_button/SidebarButton";
 import useAuth from "../../hooks/useAuth";
-import { useContext } from "react";
-import { AuthStateContext } from "../../providers/AuthStateProvider";
 
 // Sidebar props.
 // This component should be re-rendered whenever the location changes.
@@ -16,21 +14,12 @@ interface SidebarProps {
 function Sidebar({ pathname }: SidebarProps) {
   const navigate = useNavigate();
   const { googleSignIn, handleGuestSignIn } = useAuth();
-  const [user] = useContext(AuthStateContext);
 
   return (
     <div className="Sidebar">
       <div className="heading">
         <h1 className="title font-bold text-2xl">QuizMe</h1>
         <h2 className="subtitle font-light text">A flashcard app.</h2>
-        {/* TODO: Remove this temp h3 tag */}
-        <h3>
-          {!user
-            ? "not signed in"
-            : typeof user == "string"
-            ? user
-            : user.userId}
-        </h3>
       </div>
 
       {/* Buttons container. Buttons change based on current page. */}
@@ -49,10 +38,7 @@ function Sidebar({ pathname }: SidebarProps) {
 
             <SidebarButton
               text="Continue as Guest"
-              onClick={async () => {
-                await handleGuestSignIn();
-                navigate("/topics");
-              }}
+              onClick={handleGuestSignIn}
               additionalClasses="sidebar-button-gray"
             />
           </>

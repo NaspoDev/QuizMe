@@ -2,12 +2,10 @@
 // Deals with authorization logic and keeps track of the logged in user.
 
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import { useContext } from "react";
-import { AuthStateContext } from "../providers/AuthStateProvider";
 import { useNavigate } from "react-router-dom";
+import { GoogleUser, GuestUser, setUser } from "../utility/user-utility";
 
 export default function useAuth() {
-  const [user, setUser] = useContext(AuthStateContext);
   const navigate = useNavigate();
 
   // Google sign in logic.
@@ -30,7 +28,16 @@ export default function useAuth() {
         }
       );
       const data = await response.json();
+
       console.log(data);
+      // Create the GoogleUser object and save it to session storage.
+      const user: GoogleUser = {
+        userType: "google",
+        userId: data.sub, // `sub` is google's unique user id.
+        firstName: data.given_name,
+      };
+      setUser(user);
+
       navigateAfterSignIn();
     } catch (error) {
       console.log(
@@ -44,8 +51,11 @@ export default function useAuth() {
     console.log("Sign in failed!");
   }
 
-  async function handleGuestSignIn(): Promise<void> {
-    setUser("guest");
+  function handleGuestSignIn(): void {
+    const user: GuestUser = {
+      userType: "guest",
+    };
+    setUser(user);
     navigateAfterSignIn();
   }
 
@@ -55,5 +65,5 @@ export default function useAuth() {
     navigate("/topics");
   }
 
-  return { googleSignIn, handleGuestSignIn, user };
+  return { googleSignIn, handleGuestSignIn };
 }
