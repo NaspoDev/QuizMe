@@ -3,7 +3,7 @@ import "./Sidebar.scss";
 import googleIcon from "../../assets/images/google_icon.png";
 import SidebarButton from "./sidebar_button/SidebarButton";
 import useAuth from "../../hooks/useAuth";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthStatusContext } from "../../providers/AuthStatusProvider";
 import { getUser, User } from "../../utility/user-utility";
 
