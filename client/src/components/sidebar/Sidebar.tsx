@@ -3,6 +3,9 @@ import "./Sidebar.scss";
 import googleIcon from "../../assets/images/google_icon.png";
 import SidebarButton from "./sidebar_button/SidebarButton";
 import useAuth from "../../hooks/useAuth";
+import { useContext, useEffect } from "react";
+import { AuthStatusContext } from "../../providers/AuthStatusProvider";
+import { getUser, User } from "../../utility/user-utility";
 
 // Sidebar props.
 // This component should be re-rendered whenever the location changes.
@@ -13,7 +16,9 @@ interface SidebarProps {
 // Sidebar component. Always persistent, used to navigate and control the app.
 function Sidebar({ pathname }: SidebarProps) {
   const navigate = useNavigate();
-  const { googleSignIn, handleGuestSignIn } = useAuth();
+  const { googleSignIn, handleGuestSignIn, userSignOut } = useAuth();
+  const [isSignedIn] = useContext(AuthStatusContext);
+  const user: User = getUser();
 
   return (
     <div className="Sidebar">
@@ -68,6 +73,21 @@ function Sidebar({ pathname }: SidebarProps) {
           />
         )}
       </div>
+
+      {isSignedIn && (
+        // If they are signed in, display the logout container.
+        <div className="logout-container">
+          <p className="user-first-name font-light">
+            Signed in as:{" "}
+            {user?.userType == "guest" ? "Guest" : user?.firstName}
+          </p>
+          <SidebarButton
+            text="Logout"
+            onClick={userSignOut}
+            additionalClasses="sidebar-button-gray"
+          />
+        </div>
+      )}
 
       {/* Crediting myself */}
       <div className="developer-credits-container">

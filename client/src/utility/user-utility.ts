@@ -26,3 +26,8 @@ export function getUser(): User {
 export function setUser(user: User): void {
   sessionStorage.setItem(userSessionStorageKey, JSON.stringify(user));
 }
+
+// Removes the `user` item from session storage. (Usually called on sign out).
+export function clearUser(): void {
+  sessionStorage.removeItem(userSessionStorageKey);
+}

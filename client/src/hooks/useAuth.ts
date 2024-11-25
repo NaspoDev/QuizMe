@@ -3,7 +3,12 @@
 
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { GoogleUser, GuestUser, setUser } from "../utility/user-utility";
+import {
+  clearUser,
+  GoogleUser,
+  GuestUser,
+  setUser,
+} from "../utility/user-utility";
 import { useContext } from "react";
 import { AuthStatusContext } from "../providers/AuthStatusProvider";
 
@@ -70,5 +75,12 @@ export default function useAuth() {
     navigate("/topics");
   }
 
-  return { googleSignIn, handleGuestSignIn };
+  // Signs out the current user by removing them from session storage
+  // and by setting isSignedIn from AuthStatusContext to false.
+  function userSignOut(): void {
+    clearUser();
+    setSignedIn(false);
+  }
+
+  return { googleSignIn, handleGuestSignIn, userSignOut };
 }

@@ -3,7 +3,6 @@ import "./SidebarButton.scss";
 interface SidebarButtonProps {
   text: string;
   onClick: () => void;
-  backgroundColor?: string;
   iconImage?: string;
   additionalClasses?: string;
   additionalImageClasses?: string;
@@ -19,9 +18,9 @@ function SidebarButton({
   return (
     // Default background color is orange.
     <div
-      className={`SidebarButton button sidebar-button-orange 
-        ${iconImage ? "sidebar-icon-button" : ""} 
-        ${additionalClasses}`.trim()}
+      className={`SidebarButton button sidebar-button-orange ${additionalClasses} ${
+        iconImage ? "sidebar-icon-button" : ""
+      }`.trim()}
       onClick={onClick}
     >
       {iconImage && (
