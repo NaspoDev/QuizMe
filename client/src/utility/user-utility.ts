@@ -15,7 +15,7 @@ export type User = GoogleUser | GuestUser | null;
 const userSessionStorageKey: string = "user";
 
 export function getUser(): User {
-  const result = localStorage.getItem(userSessionStorageKey);
+  const result = sessionStorage.getItem(userSessionStorageKey);
   if (!result) {
     return null;
   } else {

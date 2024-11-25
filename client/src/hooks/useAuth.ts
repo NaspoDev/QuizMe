@@ -4,9 +4,13 @@
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { GoogleUser, GuestUser, setUser } from "../utility/user-utility";
+import { useContext } from "react";
+import { AuthStatusContext } from "../providers/AuthStatusProvider";
 
 export default function useAuth() {
   const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isSignedIn, setSignedIn] = useContext(AuthStatusContext);
 
   // Google sign in logic.
   const googleSignIn = useGoogleLogin({
@@ -29,14 +33,14 @@ export default function useAuth() {
       );
       const data = await response.json();
 
-      console.log(data);
       // Create the GoogleUser object and save it to session storage.
       const user: GoogleUser = {
         userType: "google",
         userId: data.sub, // `sub` is google's unique user id.
         firstName: data.given_name,
       };
-      setUser(user);
+      setUser(user); // Set the user in session storage
+      setSignedIn(true); // Update the AuthStatusContext
 
       navigateAfterSignIn();
     } catch (error) {
@@ -55,7 +59,8 @@ export default function useAuth() {
     const user: GuestUser = {
       userType: "guest",
     };
-    setUser(user);
+    setUser(user); // Set the user in session storage
+    setSignedIn(true); // Update the AuthStatusContext
     navigateAfterSignIn();
   }
 
