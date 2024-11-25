@@ -11,6 +11,7 @@ import {
 } from "../utility/user-utility";
 import { useContext } from "react";
 import { AuthStatusContext } from "../providers/AuthStatusProvider";
+import userService from "../services/UserService";
 
 export default function useAuth() {
   const navigate = useNavigate();
@@ -38,19 +39,22 @@ export default function useAuth() {
       );
       const data = await response.json();
 
-      // Create the GoogleUser object and save it to session storage.
+      // Create the GoogleUser object.
       const user: GoogleUser = {
         userType: "google",
         userId: data.sub, // `sub` is google's unique user id.
         firstName: data.given_name,
       };
+
+      // Create the user on the backend if they don't already exist (i.e. new user).
+      await userService.createUserIfDoesNotExist(user);
       setUser(user); // Set the user in session storage
       setSignedIn(true); // Update the AuthStatusContext
 
       navigateAfterSignIn();
     } catch (error) {
       console.log(
-        "Failed to fetch user info from Google api during google sign in."
+        "Failed to fetch user info from Google api during google sign in or failed to create user on the backend."
       );
       console.log(error);
     }
