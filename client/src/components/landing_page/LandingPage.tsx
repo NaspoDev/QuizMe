@@ -1,7 +1,21 @@
+import { useContext, useEffect } from "react";
 import "./LandingPage.scss";
+import { AuthStatusContext } from "../../providers/AuthStatusProvider";
+import { useNavigate } from "react-router-dom";
 
 // The landing page
 function LandingPage() {
+  const [isSignedIn] = useContext(AuthStatusContext);
+  const navigate = useNavigate();
+
+  // If the user is logged in, they should be be able to visit the
+  // landing page unless they log out, so redirect them if they try.
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate("/topics");
+    }
+  });
+
   return (
     <div className="LandingPage">
       <h1 className="heading text-2xl font-bold">
