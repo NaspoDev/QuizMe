@@ -1,5 +1,8 @@
 // Topic service. Handles all server related Topics operations.
 
+import apiUrl from "../api";
+import { getUser, User } from "../utility/user-utility";
+
 // The Topic interface, used to create Topics.
 export interface Topic {
   id: string;
@@ -19,9 +22,18 @@ const topics: Topic[] = [
 ];
 
 class TopicService {
+  readonly topicsRoute: string = `${apiUrl}/topics`;
+
   async getUserTopics(): Promise<Topic[]> {
-    // TODO: implementation
-    return topics;
+    const user: User = getUser();
+    if (!user || user.userType == "guest") {
+      throw new Error("Cannot get user topics for null or guest user!");
+    }
+
+    fetch(`${this.topicsRoute}/user-topics/${user.userId}`)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+    //TODO: parse data and return Topics[]
   }
 
   async getTopic(topicId: string): Promise<Topic> {

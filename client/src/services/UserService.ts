@@ -4,9 +4,11 @@ import { NonGuestUser } from "../utility/user-utility";
 import apiUrl from "../api";
 
 class UserService {
+  readonly usersRoute: string = `${apiUrl}/users`;
+
   // Tries to create a new user with the user provided if they don't exist.
   async createUserIfDoesNotExist(user: NonGuestUser): Promise<void> {
-    fetch(`${apiUrl}/users`, {
+    fetch(`${this.usersRoute}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

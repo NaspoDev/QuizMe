@@ -32,7 +32,10 @@ function TopicsPage() {
 
   useEffect(() => {
     // Call backend api to get the user's topics.
-    topicService.getUserTopics().then(setTopics);
+    topicService
+      .getUserTopics()
+      .then(setTopics)
+      .catch((error) => console.error("Could not get user topics:", error));
   }, []);
 
   return (
