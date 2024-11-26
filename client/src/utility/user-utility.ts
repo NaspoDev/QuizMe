@@ -11,6 +11,10 @@ export interface GuestUser {
 }
 
 export type User = GoogleUser | GuestUser | null;
+// The NonGuestUser type can be used to accept every type of user except a
+// guest user. This is useful as it avoids having to have many if statements
+// to check the user type if all we really care about is that it's not a Guest User.
+export type NonGuestUser = Exclude<User, GuestUser | null>;
 
 const userSessionStorageKey: string = "user";
 

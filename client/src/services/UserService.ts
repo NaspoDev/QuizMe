@@ -1,11 +1,29 @@
 // User service. Handles all server related user operations.
 
-import { User } from "../utility/user-utility";
+import { NonGuestUser } from "../utility/user-utility";
+import apiUrl from "../api";
 
 class UserService {
   // Tries to create a new user with the user provided if they don't exist.
-  async createUserIfDoesNotExist(user: User): Promise<void> {
-    // TODO: implementation...
+  async createUserIfDoesNotExist(user: NonGuestUser): Promise<void> {
+    fetch(`${apiUrl}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user.userId,
+        authProvider: user.userType,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to create user: ${response.statusText}`);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to create new user: ", error);
+      });
   }
 }
 
