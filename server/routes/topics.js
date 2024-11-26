@@ -50,42 +50,39 @@ router.post("/", (req, res) => {
   const { topicId, topicName, userId } = req.body;
 
   // First get the user's db_id.
-  db.query(
-    `SELECT * FROM users WHERE user_id = '${req.params.userId}'`,
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({
-          message:
-            "An error occurred while retrieving the user's internal id for new topic creation.",
-          error: err,
-        });
-        return;
-      }
-
-      const userDbId = result[0].db_id;
-
-      // Create the topic.
-      db.query(
-        `INSERT INTO topics (topic_id, name, user_db_id) VALUES (?, ?, ?)`,
-        [topicId, topicName, userDbId],
-        (err, result) => {
-          if (err) {
-            console.error(err);
-            res.status(500).json({
-              message: "An error occurred while creating the topic.",
-              error: err,
-            });
-            return;
-          }
-          res.json({
-            message: "Topic created successfully!",
-            result: result,
-          });
-        }
-      );
+  db.query(`SELECT * FROM users WHERE user_id = ?`, [userId], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({
+        message:
+          "An error occurred while retrieving the user's internal id for new topic creation.",
+        error: err,
+      });
+      return;
     }
-  );
+
+    const userDbId = result[0].db_id;
+
+    // Create the topic.
+    db.query(
+      `INSERT INTO topics (topic_id, name, user_db_id) VALUES (?, ?, ?)`,
+      [topicId, topicName, userDbId],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({
+            message: "An error occurred while creating the topic.",
+            error: err,
+          });
+          return;
+        }
+        res.json({
+          message: "Topic created successfully!",
+          result: result,
+        });
+      }
+    );
+  });
 });
 
 // --- PUT REQUESTS ---
