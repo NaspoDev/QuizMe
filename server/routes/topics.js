@@ -9,18 +9,36 @@ const db = require("../database");
 
 // Get a user's topics.
 router.get("/user-topics/:userId", (req, res) => {
+  // First get the user's db id.
   db.query(
-    `SELECT * FROM topics WHERE user_id = '${req.params.userId}'`,
+    `SELECT * FROM users WHERE user_id = '${req.params.userId}'`,
     (err, result) => {
       if (err) {
         console.error(err);
         res.status(500).json({
-          message: "An error occurred while retrieving the user's topics.",
+          message:
+            "An error occurred while retrieving the user's internal id for retrieving their topics.",
           error: err,
         });
         return;
       }
-      res.json(result);
+      const userDbId = result[0].db_id;
+
+      db.query(
+        `SELECT * FROM topics WHERE user_db_id = ?`,
+        [userDbId],
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            res.status(500).json({
+              message: "An error occurred while retrieving the user's topics.",
+              error: err,
+            });
+            return;
+          }
+          res.json(result);
+        }
+      );
     }
   );
 });
