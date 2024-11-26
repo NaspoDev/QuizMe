@@ -1,5 +1,7 @@
 // Flashcard service. Handles all server related Flashcard operations.
 
+import apiUrl from "../api";
+
 // The Flashcard interface, used to create Flashcard objects.
 export interface Flashcard {
   id: string;
@@ -9,99 +11,60 @@ export interface Flashcard {
 }
 
 class FlashcardService {
+  readonly flashcardsRoute: string = `${apiUrl}/flashcards`;
+
   async getUserFlashcardsByTopic(topicId: string): Promise<Flashcard[]> {
-    // TODO: implementation
+    const response = await fetch(`${this.flashcardsRoute}/topic/${topicId}`);
+    const data = await response.json();
 
-    // filler implementation
     const result: Flashcard[] = [];
-
-    for (const card of flashcards) {
-      if (card.topicId == topicId) {
-        result.push(card);
-      }
+    for (const flashcardData of data) {
+      const flashcard: Flashcard = {
+        id: flashcardData.flashcard_id,
+        question: flashcardData.question,
+        answer: flashcardData.answer,
+        topicId: topicId,
+      };
+      result.push(flashcard);
     }
 
     return result;
   }
 
-  async createFlashcard(flashcard: Flashcard): Promise<void> {}
+  async createFlashcard(flashcard: Flashcard): Promise<void> {
+    fetch(`${this.flashcardsRoute}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        flashcardId: flashcard.id,
+        question: flashcard.question,
+        answer: flashcard.answer,
+        topicId: flashcard.topicId,
+      }),
+    }).catch((error) => console.error("Error creating flashcard:", error));
+  }
 
   async updateFlashcard(flashcard: Flashcard): Promise<void> {
-    // TODO: implementation
-    console.log("Updated flashcard on the server!");
-    console.log(flashcard);
+    fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question: flashcard.question,
+        answer: flashcard.answer,
+      }),
+    }).catch((error) => console.error("Error updating flashcard:", error));
   }
 
   async deleteFlashcard(flashcard: Flashcard): Promise<void> {
-    // TODO: Implementation
-    console.log("Deleted flashcard off the server!");
-    console.log(flashcard);
+    fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
+      method: "DELETE",
+    }).catch((error) => console.error("Failed to delete flashcard:", error));
   }
 }
 
 const flashcardService: FlashcardService = new FlashcardService();
 export default flashcardService;
-
-// filler data
-const flashcards: Flashcard[] = [
-  {
-    id: "1",
-    question: "This is the first question?",
-    answer: "This is the first answer.",
-    topicId: "1",
-  },
-  {
-    id: "2",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "2",
-  },
-  {
-    id: "3",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "2",
-  },
-  {
-    id: "4",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "1",
-  },
-  {
-    id: "5",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "3",
-  },
-  {
-    id: "6",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "3",
-  },
-  {
-    id: "7",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "1",
-  },
-  {
-    id: "8",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "2",
-  },
-  {
-    id: "9",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "1",
-  },
-  {
-    id: "10",
-    question: "This is the question?",
-    answer: "This is the answer.",
-    topicId: "3",
-  },
-];
