@@ -39,10 +39,16 @@ export default function useAuth() {
       );
       const data = await response.json();
 
+      // Create the google user's user id.
+      // The user id should be created with the auth provider's (google's) user id
+      // for the user, prefixed by the auth provider's name and a dash.
+      // `sub` is google's unique user id.
+      const userId: string = `google-${data.sub}`;
+
       // Create the GoogleUser object.
       const user: GoogleUser = {
         userType: "google",
-        userId: data.sub, // `sub` is google's unique user id.
+        userId: userId,
         firstName: data.given_name,
       };
 
