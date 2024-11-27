@@ -16,7 +16,7 @@ import userService from "../services/UserService";
 export default function useAuth() {
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isSignedIn, setSignedIn] = useContext(AuthStatusContext);
+  const [_isSignedIn, setSignedIn] = useContext(AuthStatusContext);
 
   // Google sign in logic.
   const googleSignIn = useGoogleLogin({
