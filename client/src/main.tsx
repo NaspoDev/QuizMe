@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")!).render(
     the app has the necessary credentials (like client id) throughout the app. */}
     <GoogleOAuthProvider clientId={googleClientId}>
       <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <App />
         </BrowserRouter>
       </StrictMode>
