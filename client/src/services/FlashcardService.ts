@@ -1,6 +1,7 @@
 // Flashcard service. Handles all server related Flashcard operations.
 
 import apiUrl from "../api";
+import { getUser, User } from "../utility/user-utility";
 
 // The Flashcard interface, used to create Flashcard objects.
 export interface Flashcard {
@@ -12,8 +13,29 @@ export interface Flashcard {
 
 class FlashcardService {
   readonly flashcardsRoute: string = `${apiUrl}/flashcards`;
+  readonly guestSessionStorageFlashcardsKey: string = "guestUserFlashcards";
 
   async getUserFlashcardsByTopic(topicId: string): Promise<Flashcard[]> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageFlashcardsKey
+      );
+      // If its null, return an empty array.
+      if (!result) {
+        return [];
+      } else {
+        // Parse the JSON and filter for flashcards for the topic id provided.
+        const parsedResult: Flashcard[] = JSON.parse(result);
+        const flashcardsForTopic: Flashcard[] = parsedResult.filter(
+          (flashcard) => flashcard.topicId == topicId
+        );
+        return flashcardsForTopic;
+      }
+    }
+
     const response = await fetch(`${this.flashcardsRoute}/topic/${topicId}`);
     const data = await response.json();
 
@@ -32,6 +54,31 @@ class FlashcardService {
   }
 
   async createFlashcard(flashcard: Flashcard): Promise<void> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageFlashcardsKey
+      );
+      // If its null, set a new array with the new flashcard.
+      if (!result) {
+        sessionStorage.setItem(
+          this.guestSessionStorageFlashcardsKey,
+          JSON.stringify([flashcard])
+        );
+      } else {
+        // Parse the JSON, add the new topic to the list, and re-set that value.
+        const parsedResult: Flashcard[] = JSON.parse(result);
+        parsedResult.push(flashcard);
+        sessionStorage.setItem(
+          this.guestSessionStorageFlashcardsKey,
+          JSON.stringify(parsedResult)
+        );
+      }
+      return;
+    }
+
     return fetch(`${this.flashcardsRoute}/`, {
       method: "POST",
       headers: {

@@ -37,10 +37,7 @@ router.get("/topic/:topicId", (req, res) => {
             });
             return;
           }
-          res.json({
-            message: `Flashcards for topic id ${req.params.topicId} retrieved.`,
-            result: result,
-          });
+          res.json(result);
         }
       );
     }

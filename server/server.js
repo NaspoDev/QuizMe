@@ -46,8 +46,4 @@ app.use("/users", usersRouter);
 app.use("/topics", topicsRouter);
 app.use("/flashcards", flashcardsRouter);
 
-// app.listen(port, () => console.log(`Listening on port ${port}!`));
-app.listen(port, () => {
-  console.log(`Listening on port ${port}!`);
-  console.log(process.env.NODE_ENV);
-});
+app.listen(port, () => console.log(`Listening on port ${port}!`));

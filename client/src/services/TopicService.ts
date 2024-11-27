@@ -13,11 +13,28 @@ export interface Topic {
 
 class TopicService {
   readonly topicsRoute: string = `${apiUrl}/topics`;
+  readonly guestSessionStorageTopicsKey: string = "guestUserTopics";
 
   async getUserTopics(): Promise<Topic[]> {
     const user: User = getUser();
-    if (!user || user.userType == "guest") {
-      throw new Error("Cannot get user topics for null or guest user!");
+    if (!user) {
+      throw new Error("Cannot get user topics for null user!");
+    }
+
+    // If its a guest user, use session storage.
+    if (user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageTopicsKey
+      );
+      // If its null, return an empty array.
+      if (!result) {
+        return [];
+      } else {
+        // Parse the JSON.
+        const parsedResult: Topic[] = JSON.parse(result);
+        return parsedResult;
+      }
     }
 
     // Make the requests. First fetch topics, then for each topic fetch their
@@ -71,6 +88,31 @@ class TopicService {
   }
 
   async getTopic(topicId: string): Promise<Topic> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageTopicsKey
+      );
+      // If its null, print and error.
+      if (!result) {
+        throw new Error(
+          "There are no topics set in session storage for the guest user!"
+        );
+      } else {
+        // Parse the JSON and find the correct topic
+        const parsedResult: Topic[] = JSON.parse(result);
+        for (const topic of parsedResult) {
+          if (topic.id == topicId) {
+            return topic;
+          }
+        }
+        // If the correct topic could not be found throw an error.
+        throw new Error("Could not find correct topic for guest user!");
+      }
+    }
+
     try {
       // Fetch topic.
       const topicResponse = await fetch(`${this.topicsRoute}/${topicId}`);
@@ -96,11 +138,35 @@ class TopicService {
   }
 
   async createTopic(topic: Topic): Promise<void> {
-    // Get the user id.
     const user: User = getUser();
-    if (!user || user.userType == "guest") {
-      throw new Error("Cannot get user topics for null or guest user!");
+    if (!user) {
+      throw new Error("Cannot get user topics for null user!");
     }
+
+    // If its a guest user, use session storage.
+    if (user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageTopicsKey
+      );
+      // If its null, set a new array with the new topic.
+      if (!result) {
+        sessionStorage.setItem(
+          this.guestSessionStorageTopicsKey,
+          JSON.stringify([topic])
+        );
+      } else {
+        // Parse the JSON, add the new topic to the list, and re-set that value.
+        const parsedResult: Topic[] = JSON.parse(result);
+        parsedResult.push(topic);
+        sessionStorage.setItem(
+          this.guestSessionStorageTopicsKey,
+          JSON.stringify(parsedResult)
+        );
+      }
+      return;
+    }
+
     const userId: string = user.userId;
 
     try {
@@ -121,6 +187,35 @@ class TopicService {
   }
 
   async updateTopic(topic: Topic): Promise<void> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageTopicsKey
+      );
+      // If its null, throw an error.
+      if (!result) {
+        throw new Error(
+          "There are no topics set in session storage for the guest user!"
+        );
+      } else {
+        // Parse the JSON, update the correct topic, then re-set the topics.
+        const parsedResult: Topic[] = JSON.parse(result);
+        const updatedTopics: Topic[] = parsedResult.map((t) => {
+          if (t.id == topic.id) {
+            return topic;
+          }
+          return t;
+        });
+        sessionStorage.setItem(
+          this.guestSessionStorageTopicsKey,
+          JSON.stringify(updatedTopics)
+        );
+      }
+      return;
+    }
+
     return fetch(`${this.topicsRoute}/${topic.id}`, {
       method: "PUT",
       headers: {
@@ -140,6 +235,32 @@ class TopicService {
 
   // Deleting a topic also involves deleting all flashcards associated with that topic.
   async deleteTopic(topic: Topic): Promise<void> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageTopicsKey
+      );
+      // If its null, throw an error.
+      if (!result) {
+        throw new Error(
+          "There are no topics set in session storage for the guest user!"
+        );
+      } else {
+        // Parse the JSON, delete the correct topic, then re-set the topics.
+        const parsedResult: Topic[] = JSON.parse(result);
+        const updatedTopics: Topic[] = parsedResult.filter(
+          (t) => t.id != topic.id
+        );
+        sessionStorage.setItem(
+          this.guestSessionStorageTopicsKey,
+          JSON.stringify(updatedTopics)
+        );
+      }
+      return;
+    }
+
     fetch(`${this.topicsRoute}/${topic.id}`, {
       method: "DELETE",
     }).catch((error) => console.error("Failed to delete topic:", error));
