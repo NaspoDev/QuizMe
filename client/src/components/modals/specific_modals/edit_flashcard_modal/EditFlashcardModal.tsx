@@ -63,7 +63,7 @@ function EditFlashcardModal({
     </Modal>
   );
 
-  function handleUpdateFlashcard(): void {
+  async function handleUpdateFlashcard(): Promise<void> {
     const flashcardQuestionInput: HTMLInputElement = document.getElementById(
       "flashcard-question-input"
     ) as HTMLInputElement;
@@ -94,7 +94,7 @@ function EditFlashcardModal({
       setFlashcards(updatedFlashcards);
 
       // Update flashcard on the server.
-      flashcardService.updateFlashcard(updatedFlashcard);
+      await flashcardService.updateFlashcard(updatedFlashcard);
     }
 
     closeModal();

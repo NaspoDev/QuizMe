@@ -3,6 +3,7 @@ import "./AddFlashcardModal.scss";
 import flashcardService, {
   Flashcard,
 } from "../../../../services/FlashcardService";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddFlashcardModalProps extends ModalProps {
   flashcards: Flashcard[];
@@ -57,7 +58,7 @@ function AddFlashcardModal({
     </Modal>
   );
 
-  function handleCreateFlashcard(): void {
+  async function handleCreateFlashcard(): Promise<void> {
     const flashcardQuestionInput: HTMLInputElement = document.getElementById(
       "flashcard-question-input"
     ) as HTMLInputElement;
@@ -71,7 +72,7 @@ function AddFlashcardModal({
     if (questionInputValue.length > 0 && answerInputValue.length > 0) {
       // Define the new flashcard object.
       const newFlashcard: Flashcard = {
-        id: "123", // TODO: Create proper ID
+        id: uuidv4(),
         question: questionInputValue,
         answer: answerInputValue,
         topicId: topicId,
@@ -80,7 +81,7 @@ function AddFlashcardModal({
       // Create new flashcard locally.
       setFlashcards([...flashcards, newFlashcard]);
       // Create new flashcard on the server.
-      flashcardService.createFlashcard(newFlashcard);
+      await flashcardService.createFlashcard(newFlashcard);
     }
 
     closeModal();

@@ -30,10 +30,9 @@ function ActiveQuizPage() {
     topicService
       .getTopic(topicId)
       .then((topic) => setTopicName(topic.name))
-      .catch(() => console.log("Error fetching topic."));
+      .catch(() => console.error("Error fetching topic."));
 
     // Get topic flashcards, then call to shuffle them.
-    // TODO: pass in proper user ID
     flashcardService.getUserFlashcardsByTopic(topicId).then((data) => {
       setFlashcards(shuffleFlashcards(data));
     });

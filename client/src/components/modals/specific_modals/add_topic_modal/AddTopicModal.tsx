@@ -1,6 +1,7 @@
 import "./AddTopicModal.scss";
 import topicService, { Topic } from "../../../../services/TopicService";
 import Modal, { ModalProps } from "../../generic_modal/Modal";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddTopicModalProps extends ModalProps {
   topics: Topic[];
@@ -48,7 +49,7 @@ function AddTopicModal({
     if (inputValue.length > 0) {
       // Define the new topic object.
       const newTopic: Topic = {
-        id: "123", // TODO: Pass in proper ID
+        id: uuidv4(),
         name: inputValue,
         numberOfFlashcards: 0,
       };

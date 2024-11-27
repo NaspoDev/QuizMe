@@ -1,4 +1,4 @@
-import { Topic } from "../../../../services/TopicService";
+import topicService, { Topic } from "../../../../services/TopicService";
 import Modal, { ModalProps } from "../../generic_modal/Modal";
 import "./DeleteTopicConfirmationModal.scss";
 
@@ -52,6 +52,9 @@ function DeleteTopicConfirmationModal({
       (topic) => topic.id != topicToDelete.id
     );
     setTopics(updatedTopics);
+
+    // Delete topic on the server.
+    topicService.deleteTopic(topicToDelete);
 
     closeModal();
   }

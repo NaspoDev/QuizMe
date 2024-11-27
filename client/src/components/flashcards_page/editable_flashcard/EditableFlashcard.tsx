@@ -107,7 +107,7 @@ function EditableFlashcard({
   }
 
   // Deletes this flashcard.
-  function deleteFlashcard(): void {
+  async function deleteFlashcard(): Promise<void> {
     // Delete flashcard locally by updating flashcards state array.
     const updatedFlashcards: Flashcard[] = flashcards.filter(
       (card) => card.id != flashcard.id
@@ -115,7 +115,7 @@ function EditableFlashcard({
     setFlashcards(updatedFlashcards);
 
     // Delete flashcard on the server.
-    flashcardService.deleteFlashcard(flashcard);
+    await flashcardService.deleteFlashcard(flashcard);
   }
 }
 

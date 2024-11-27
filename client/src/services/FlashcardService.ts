@@ -32,7 +32,7 @@ class FlashcardService {
   }
 
   async createFlashcard(flashcard: Flashcard): Promise<void> {
-    fetch(`${this.flashcardsRoute}/`, {
+    return fetch(`${this.flashcardsRoute}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,11 +43,17 @@ class FlashcardService {
         answer: flashcard.answer,
         topicId: flashcard.topicId,
       }),
-    }).catch((error) => console.error("Error creating flashcard:", error));
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(`Failed to create flashcard: ${response.statusText}`);
+        }
+      })
+      .catch((error) => console.error("Error creating flashcard:", error));
   }
 
   async updateFlashcard(flashcard: Flashcard): Promise<void> {
-    fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
+    return fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -56,13 +62,25 @@ class FlashcardService {
         question: flashcard.question,
         answer: flashcard.answer,
       }),
-    }).catch((error) => console.error("Error updating flashcard:", error));
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(`Failed to update flashcard: ${response.statusText}`);
+        }
+      })
+      .catch((error) => console.error("Error updating flashcard:", error));
   }
 
   async deleteFlashcard(flashcard: Flashcard): Promise<void> {
-    fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
+    return fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
       method: "DELETE",
-    }).catch((error) => console.error("Failed to delete flashcard:", error));
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(`Failed to delete flashcard: ${response.statusText}`);
+        }
+      })
+      .catch((error) => console.error("Failed to delete flashcard:", error));
   }
 }
 

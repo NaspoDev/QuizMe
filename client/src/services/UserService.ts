@@ -8,24 +8,33 @@ class UserService {
 
   // Tries to create a new user with the user provided if they don't exist.
   async createUserIfDoesNotExist(user: NonGuestUser): Promise<void> {
-    fetch(`${this.usersRoute}/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: user.userId,
-        authProvider: user.userType,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to create user: ${response.statusText}`);
-        }
-      })
-      .catch((error) => {
-        console.error("Failed to create new user: ", error);
+    try {
+      // First check if the user already exists.
+      const userResponse = await fetch(`${this.usersRoute}/${user.userId}`);
+      const userResData = await userResponse.json();
+      // If the user already exist, exit;
+      if (userResData.length != 0) {
+        return;
+      }
+    } catch (error) {
+      console.error("Checking user's existence:", error);
+    }
+
+    // Otherwise the user doesn't exist, so create them.
+    try {
+      await fetch(`${this.usersRoute}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user.userId,
+          authProvider: user.userType,
+        }),
       });
+    } catch (error) {
+      console.error("Error creating new user.", error);
+    }
   }
 }
 

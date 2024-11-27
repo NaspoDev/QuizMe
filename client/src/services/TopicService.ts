@@ -74,7 +74,8 @@ class TopicService {
     try {
       // Fetch topic.
       const topicResponse = await fetch(`${this.topicsRoute}/${topicId}`);
-      const topicData = await topicResponse.json();
+      const topicResJson = await topicResponse.json();
+      const topicData = topicResJson[0];
 
       // Fetch flashcards for the topic to get the number of flashcards.
       const flashcards: Flashcard[] =
@@ -102,23 +103,25 @@ class TopicService {
     }
     const userId: string = user.userId;
 
-    fetch(`${this.topicsRoute}/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        topicId: topic.id,
-        topicName: topic.name,
-        userId: userId,
-      }),
-    }).catch((error) => {
+    try {
+      await fetch(`${this.topicsRoute}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          topicId: topic.id,
+          topicName: topic.name,
+          userId: userId,
+        }),
+      });
+    } catch (error) {
       console.error("Failed to create topic:", error);
-    });
+    }
   }
 
   async updateTopic(topic: Topic): Promise<void> {
-    fetch(`${this.topicsRoute}/${topic.id}`, {
+    return fetch(`${this.topicsRoute}/${topic.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +129,13 @@ class TopicService {
       body: JSON.stringify({
         topicName: topic.name,
       }),
-    }).catch((error) => console.error("Failed to update topic:", error));
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error(`Failed to update topic: ${response.statusText}`);
+        }
+      })
+      .catch((error) => console.error("Failed to update topic:", error));
   }
 
   // Deleting a topic also involves deleting all flashcards associated with that topic.

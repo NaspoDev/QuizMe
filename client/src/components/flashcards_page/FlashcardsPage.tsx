@@ -29,7 +29,6 @@ function FlashcardsPage() {
 
   // Call backend api to get the user's flashcards.
   useEffect(() => {
-    // TODO: pass in proper user ID
     flashcardService.getUserFlashcardsByTopic(topicId).then(setFlashcards);
   }, []);
 

@@ -125,7 +125,6 @@ function StartQuizPage() {
     // If a timed quiz is not selected, navigate to active-quiz.
     // (Pass in '0' for time param as 0 will represent unlimited time).
     if (!timedQuizOptionTrue.checked) {
-      console.log("not timed");
       navigate(`/active-quiz/${topicId}/0`);
       return;
     }
