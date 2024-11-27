@@ -100,6 +100,35 @@ class FlashcardService {
   }
 
   async updateFlashcard(flashcard: Flashcard): Promise<void> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageFlashcardsKey
+      );
+      // If its null, throw an error.
+      if (!result) {
+        throw new Error(
+          "There are no flashcards set in session storage for the guest user!"
+        );
+      } else {
+        // Parse the JSON, update the correct flashcard, then re-set the flashcards.
+        const parsedResult: Flashcard[] = JSON.parse(result);
+        const updatedFlashcards: Flashcard[] = parsedResult.map((f) => {
+          if (f.id == flashcard.id) {
+            return flashcard;
+          }
+          return f;
+        });
+        sessionStorage.setItem(
+          this.guestSessionStorageFlashcardsKey,
+          JSON.stringify(updatedFlashcards)
+        );
+      }
+      return;
+    }
+
     return fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
       method: "PUT",
       headers: {
@@ -119,6 +148,32 @@ class FlashcardService {
   }
 
   async deleteFlashcard(flashcard: Flashcard): Promise<void> {
+    // If its a guest user, use session storage.
+    const user: User = getUser();
+    if (user && user.userType == "guest") {
+      // Get the result from session storage.
+      const result: string | null = sessionStorage.getItem(
+        this.guestSessionStorageFlashcardsKey
+      );
+      // If its null, throw an error.
+      if (!result) {
+        throw new Error(
+          "There are no flashcards set in session storage for the guest user!"
+        );
+      } else {
+        // Parse the JSON, delete the correct flashcard, then re-set the flashcards.
+        const parsedResult: Flashcard[] = JSON.parse(result);
+        const updatedFlashcards: Flashcard[] = parsedResult.filter(
+          (f) => f.id != flashcard.id
+        );
+        sessionStorage.setItem(
+          this.guestSessionStorageFlashcardsKey,
+          JSON.stringify(updatedFlashcards)
+        );
+      }
+      return;
+    }
+
     return fetch(`${this.flashcardsRoute}/${flashcard.id}`, {
       method: "DELETE",
     })
