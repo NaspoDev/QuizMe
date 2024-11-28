@@ -19,7 +19,7 @@ function QuizFlashcard({ flashcard }: QuizFlashcardProps) {
     : false;
 
   return (
-    <div className="QuizFlashcard text-lg font-semibold">
+    <div className="QuizFlashcard text-reg font-semibold">
       <div
         className={`container ${isFirefox ? "firefox-container" : ""}`.trim()}
         id={flashcardContainerId}
