@@ -8,6 +8,7 @@
   height: 100%;
   @include displayFlex(column, flex-start);
   padding: 50px 50px 0px 50px;
+  overflow: scroll;
 
   .start-quiz-heading {
     margin-bottom: 70px;
