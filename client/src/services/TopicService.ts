@@ -31,9 +31,23 @@ class TopicService {
       if (!result) {
         return [];
       } else {
-        // Parse the JSON.
-        const parsedResult: Topic[] = JSON.parse(result);
-        return parsedResult;
+        // Parse the JSON to get the topic id and name.
+        const parsedResult: { id: string; name: string }[] = JSON.parse(result);
+
+        // Now for each topic, get it's flashcards and set numberOfFlashcards to it's length.
+        const topics: Topic[] = [];
+        for (const topicData of parsedResult) {
+          const topic: Topic = {
+            id: topicData.id,
+            name: topicData.name,
+            numberOfFlashcards: (
+              await flashcardService.getUserFlashcardsByTopic(topicData.id)
+            ).length,
+          };
+          topics.push(topic);
+        }
+
+        return topics;
       }
     }
 
@@ -257,6 +271,13 @@ class TopicService {
           this.guestSessionStorageTopicsKey,
           JSON.stringify(updatedTopics)
         );
+
+        // Next we have to delete all the flashcards associated with that topic.
+        const flashcards: Flashcard[] =
+          await flashcardService.getUserFlashcardsByTopic(topic.id);
+        for (const flashcard of flashcards) {
+          flashcardService.deleteFlashcard(flashcard);
+        }
       }
       return;
     }
