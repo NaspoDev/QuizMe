@@ -14,7 +14,7 @@
   }
 
   .topics-display {
-    @include displayFlex(column);
+    @include displayFlex(column, flex-start);
     width: 100%;
     overflow-y: auto;
     padding-bottom: 70px;
