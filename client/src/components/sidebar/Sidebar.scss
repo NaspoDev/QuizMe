@@ -17,6 +17,13 @@
     .title {
       margin-bottom: 10px;
     }
+
+    // Developer credits mobile are only to be displayed when the mobile
+    //responsive design is active. Hidden by default.
+    .developer-credits-mobile {
+      display: none;
+      margin-top: 10px;
+    }
   }
 
   .buttons {
@@ -39,7 +46,8 @@
     gap: 15px;
   }
 
-  .developer-credits-container {
+  .developer-credits-container,
+  .developer-credits-mobile {
     @include displayFlex(column, flex-end, center);
     padding-bottom: 20px;
 
@@ -64,5 +72,36 @@
 
   .sidebar-button-gray {
     background-color: $dark-gray;
+  }
+}
+
+// Responsive Design
+
+@media (max-width: 1100px) {
+  .Sidebar {
+    @include displayFlex(row);
+    gap: 150px;
+
+    .heading {
+      padding-bottom: 0px;
+
+      .developer-credits-mobile {
+        display: block;
+      }
+    }
+
+    .buttons {
+      width: auto;
+      gap: 20px;
+    }
+
+    .logout-container {
+      width: auto;
+      gap: 20px;
+    }
+
+    .developer-credits-container {
+      display: none;
+    }
   }
 }

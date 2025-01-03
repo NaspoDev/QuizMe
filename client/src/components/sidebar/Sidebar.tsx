@@ -25,6 +25,18 @@ function Sidebar({ pathname }: SidebarProps) {
       <div className="heading">
         <h1 className="title font-bold text-2xl">QuizMe</h1>
         <h2 className="subtitle font-light text">A flashcard app.</h2>
+        {/* Developer credits mobile are only to be displayed when the mobile
+        responsive design is active. Hidden by default. */}
+        <p className="developer-credits-mobile text-sm font-light">
+          Created by{" "}
+          <a
+            href="https://naspo.dev/"
+            target="_blank"
+            className="naspo-hyperlink"
+          >
+            Naspo
+          </a>
+        </p>
       </div>
 
       {/* Buttons container. Buttons change based on current page. */}
