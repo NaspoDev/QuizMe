@@ -96,3 +96,19 @@
     }
   }
 }
+
+@media (max-width: 850px) {
+  .TopicsPage {
+    padding: 5% 0px;
+    // Lowering the size of all text by a little.
+    // I can do this because I use em sizing, so can just re-define a lower base
+    // size and everything will follow relative to that.
+    font-size: 16px;
+
+    .topics-display {
+      .topic-card {
+        width: 90%;
+      }
+    }
+  }
+}
