@@ -52,6 +52,14 @@
     .content-container {
       .flashcards-display {
         padding-right: 20px;
+
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(
+            flashcardsPageVars.$editable-flashcard-width-mobile,
+            flashcardsPageVars.$editable-flashcard-width-mobile
+          )
+        );
       }
     }
   }

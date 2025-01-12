@@ -105,3 +105,21 @@
     }
   }
 }
+
+@media (max-width: 850px) {
+  .Sidebar {
+    @include displayFlex(row, space-between);
+    gap: 0px;
+    padding: 0px 5%;
+
+    .heading {
+      display: none;
+    }
+
+    .logout-container {
+      width: auto;
+      gap: 20px;
+      font-size: 0.875em;
+    }
+  }
+}
