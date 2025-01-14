@@ -92,7 +92,25 @@
 
 @media (max-width: 1100px) {
   .EditableFlashcard {
-    width: flashcardsPageVars.$editable-flashcard-width-mobile;
+    width: flashcardsPageVars.$editable-flashcard-width-responsive1;
     height: 200px;
+  }
+}
+
+@media (max-width: 850px) {
+  .EditableFlashcard {
+    width: flashcardsPageVars.$editable-flashcard-width-responsive2;
+    height: 170px;
+
+    .container {
+      .front-face,
+      .back-face {
+        .buttons {
+          .card-option-button {
+            font-size: 22px;
+          }
+        }
+      }
+    }
   }
 }

@@ -56,10 +56,31 @@
         grid-template-columns: repeat(
           auto-fit,
           minmax(
-            flashcardsPageVars.$editable-flashcard-width-mobile,
-            flashcardsPageVars.$editable-flashcard-width-mobile
+            flashcardsPageVars.$editable-flashcard-width-responsive1,
+            flashcardsPageVars.$editable-flashcard-width-responsive1
           )
         );
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .FlashcardsPage {
+    padding: 5% 0% 0% 5%;
+    font-size: 16px;
+
+    .content-container {
+      .flashcards-display {
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(
+            flashcardsPageVars.$editable-flashcard-width-responsive2,
+            flashcardsPageVars.$editable-flashcard-width-responsive2
+          )
+        );
+
+        gap: 10px;
       }
     }
   }
