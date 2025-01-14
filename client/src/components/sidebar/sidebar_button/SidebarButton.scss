@@ -27,12 +27,20 @@
     width: 150px;
     padding: 10px 0px;
   }
+
+  .landing-page-button {
+    width: 300px;
+  }
 }
 
 @media (max-width: 850px) {
   .SidebarButton {
     width: 120px;
     padding: 10px 10px;
-    font-size: 0.875em;
+    font-size: 16px;
+  }
+
+  .landing-page-button {
+    width: 250px;
   }
 }

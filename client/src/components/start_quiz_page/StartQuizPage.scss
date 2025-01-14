@@ -9,6 +9,7 @@
   @include displayFlex(column, flex-start);
   padding: 50px 50px 0px 50px;
   overflow: scroll;
+  overflow-x: hidden;
 
   .start-quiz-heading {
     margin-bottom: 70px;

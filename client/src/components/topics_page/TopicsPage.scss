@@ -81,7 +81,7 @@
   }
 
   .add-topic-button {
-    position: fixed;
+    position: absolute;
     bottom: 7%;
     right: 5%;
   }
@@ -89,7 +89,7 @@
 
 @media (max-width: 1100px) {
   .TopicsPage {
-    padding: 50px 0px;
+    padding: 50px 0px 0px 0px;
 
     .topics-heading {
       margin-bottom: 40px;
@@ -99,7 +99,7 @@
 
 @media (max-width: 850px) {
   .TopicsPage {
-    padding: 5% 0px;
+    padding: 5% 0px 0px 0px;
     // Lowering the size of all text by a little.
     // I can do this because I use em sizing, so can just re-define a lower base
     // size and everything will follow relative to that.

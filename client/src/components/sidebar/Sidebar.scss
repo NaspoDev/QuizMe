@@ -79,14 +79,16 @@
 
 @media (max-width: 1100px) {
   .Sidebar {
-    @include displayFlex(row);
-    gap: 150px;
+    @include displayFlex(row, space-between);
+    gap: 0px;
+    padding: 0px 5%;
 
     .heading {
       padding-bottom: 0px;
 
       .developer-credits-mobile {
         display: block;
+        padding: 0px;
       }
     }
 
@@ -108,9 +110,15 @@
 
 @media (max-width: 850px) {
   .Sidebar {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 550px) {
+  .Sidebar {
     @include displayFlex(row, space-between);
     gap: 0px;
-    padding: 0px 5%;
+    padding: 0px 10%;
 
     .heading {
       display: none;
@@ -121,5 +129,16 @@
       gap: 20px;
       font-size: 0.875em;
     }
+
+    .buttons {
+      .landing-page-button {
+        justify-self: center;
+      }
+    }
+  }
+
+  // Setting display to flex and center for the landing page sidebar.
+  .Sidebar.landing-page-sidebar {
+    @include displayFlex();
   }
 }

@@ -21,7 +21,13 @@ function Sidebar({ pathname }: SidebarProps) {
   const user: User = getUser();
 
   return (
-    <div className="Sidebar">
+    // If we are on the landing page, add a landing page sidebar css class.
+    // (Used for styling with responsive design).
+    <div
+      className={`Sidebar ${
+        pathname == "/" ? "landing-page-sidebar" : ""
+      }`.trim()}
+    >
       <div className="heading">
         <h1 className="title font-bold text-2xl">QuizMe</h1>
         <h2 className="subtitle font-light text">A flashcard app.</h2>
@@ -49,14 +55,14 @@ function Sidebar({ pathname }: SidebarProps) {
               text="Sign in With Google"
               onClick={googleSignIn}
               iconImage={googleIcon}
-              additionalClasses="sidebar-button-green"
+              additionalClasses="sidebar-button-green landing-page-button"
               additionalImageClasses="google-sign-in-button-image"
             />
 
             <SidebarButton
               text="Continue as Guest"
               onClick={handleGuestSignIn}
-              additionalClasses="sidebar-button-gray"
+              additionalClasses="sidebar-button-gray landing-page-button"
             />
           </>
         )}
