@@ -106,8 +106,22 @@
     font-size: 16px;
 
     .topics-display {
+      gap: 30px;
+
       .topic-card {
         width: 90%;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .TopicsPage {
+    .topics-display {
+      .topic-card {
+        .info-container {
+          flex: 4;
+        }
       }
     }
   }
