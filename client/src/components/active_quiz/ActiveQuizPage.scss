@@ -81,3 +81,53 @@
     left: 10%;
   }
 }
+
+@media (max-width: 850px) {
+  .ActiveQuizPage {
+    padding: 20px 5% 0px 5%;
+    font-size: 16px;
+
+    .heading-area {
+      .active-quiz-heading {
+        margin-bottom: 25px;
+      }
+
+      .quiz-progress-bar {
+        width: 300px;
+        margin-bottom: 15px;
+      }
+
+      .quiz-progress-numeric {
+        margin-bottom: 20px;
+      }
+
+      .question-time-remaining-container {
+        margin-bottom: 10px;
+        padding-left: 30px;
+      }
+    }
+
+    .flashcard-container {
+      margin-top: 20px;
+    }
+
+    .flip-flashcard-prompt {
+      padding: 10px 0px;
+    }
+
+    .next-flashcard-button,
+    .complete-quiz-button {
+      position: absolute;
+      bottom: 5%;
+      right: 5%;
+      padding: 4px;
+    }
+
+    .previous-flashcard-button {
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+      padding: 4px;
+    }
+  }
+}
