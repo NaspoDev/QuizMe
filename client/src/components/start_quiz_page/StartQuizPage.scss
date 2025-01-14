@@ -68,3 +68,20 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .StartQuizPage {
+    padding: 30px 5% 0px 5%;
+    font-size: 16px;
+
+    .start-quiz-heading {
+      margin-bottom: 20px;
+    }
+
+    .start-quiz-form {
+      .form-item {
+        width: 300px;
+      }
+    }
+  }
+}
