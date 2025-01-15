@@ -20,12 +20,14 @@
     gap: 30px;
     border-radius: 10px;
     padding: 20px;
+    background-color: $light-gray;
+    background-color: rgba($color: $theme-color-red, $alpha: 0.9);
+    color: $text-color-white;
 
     .form-item {
       width: 400px;
       @include displayFlex(column, center, flex-start);
       gap: 20px;
-      background-color: rgba($color: $light-gray, $alpha: 0.5);
       padding: 15px;
       border-radius: 10px;
     }
