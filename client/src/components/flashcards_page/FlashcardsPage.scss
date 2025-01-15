@@ -6,7 +6,7 @@
 
 .FlashcardsPage {
   @include displayFlex(column, flex-start, center);
-  padding: 50px 0px 0px 50px;
+  padding: 50px 50px 0px 50px;
   height: 100%;
   position: relative;
 
@@ -20,14 +20,15 @@
 
     .flashcards-display {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(flashcardsPageVars.$editable-flashcard-width, 1fr)
-      );
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       max-height: 100%;
       overflow-y: auto;
       grid-gap: 30px;
       padding-bottom: 70px;
+
+      .EditableFlashcard {
+        aspect-ratio: 14/15;
+      }
     }
 
     .add-task-button {
