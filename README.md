@@ -28,7 +28,7 @@ _Steps from `/client`_
 _Steps from `/server`_
 
 <u>Step 1: Build the docker image</u>\
-`docker build -t naspo/quizme-server:<tag>`\
+`docker build -t naspo/quizme-server:<tag> .`\
 _The tag should be the version number of the application._
 
 <u>Step 2: Push the image</u>\
