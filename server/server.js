@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === "development") {
     allowedHeaders: ["Content-Type"],
     optionsSuccessStatus: 204,
   };
+  app.use(cors(corsOptions));
 }
 
 // Enable IP address restriction middleware in production.
