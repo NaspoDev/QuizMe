@@ -23,9 +23,18 @@ function restrictAccess(req, res, next) {
 // Apply middleware
 app.use(express.json()); // for parsing application/json
 
-// Enable CORS with express for development environment, otherwise let Nginx handle it in production.
+// CORS configuration.
 if (process.env.NODE_ENV === "development") {
+  // CORS config for development.
   app.use(cors());
+} else {
+  // CORS config for production.
+  const corsOptions = {
+    origin: clientOrigin,
+    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+    optionsSuccessStatus: 204,
+  };
 }
 
 // Enable IP address restriction middleware in production.
