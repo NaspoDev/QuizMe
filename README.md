@@ -55,4 +55,6 @@ This `.env` file will be passed to the docker container when we run the image.\
 (The .env file must be kept private and should not be committed to version control).
 
 <u>Step 5: Run the image in a container</u>\
-`docker run -d -p 3000:3000 --name quizme-server --env-file path/to/.env --restart unless-stopped naspo/quizme-server:<tag>`
+`docker run -d -p 3000:3000 --name quizme-server --env-file path/to/.env --restart unless-stopped --add-host=host.docker.internal:host-gateway naspo/quizme-server:<tag>`
+
+_Note for the above command: QuizMe's database is deployed on the same server, so `host.docker.internal` is used to access the host machine. However this doesn't implicitly work on Linux so a mapping is created, hence the `--add-host` flag._
